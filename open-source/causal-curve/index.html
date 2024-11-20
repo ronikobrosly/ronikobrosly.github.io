@@ -1,3 +1,4 @@
+
 <!doctype html>
 
 <head>
@@ -58,7 +59,7 @@
 
 </head>
 
-<title>Welcome! - Roni Kobrosly's Personal Site</title>
+<title>causal-curve - Roni Kobrosly's Personal Site</title>
 
 <body>
     <div class="container">
@@ -80,7 +81,7 @@
                         
                         
                         
-                        <a class="terminal-prompt" href="/" rel="">Home</a>
+                        <a href="/" rel="">Home</a>
                         
                     </li>
                     
@@ -102,7 +103,7 @@
                         
                         
                         
-                        <a href="/open-source" rel="">Open Source</a>
+                        <a class="terminal-prompt" href="/open-source" rel="">Open Source</a>
                         
                     </li>
                     
@@ -146,23 +147,45 @@
         <!-- Body -->
         <div id="body">
             
-<div class="terminal-card">
-  <div class="card-body">
-    <p>Hello! I'm Roni and I'm a Washington, DC-based Director of Data Science @ <a href="https://www.capitalone.com/">Capital One</a>. Previous to that, I've been a fractional CTO, Head of Data Science @ <a href="https://drfirst.com/">DrFirst</a>, and a machine learning engineer / data scientist / statistician / data person in the tech industry. Before working the in the tech industry, I was a PhD environmental epidemiologist carrying out research @ the <a href="https://icahn.mssm.edu/">Icahn School of Medicine @ Mount Sinai in New York City</a>.</p>
-<p>I'm also the creator and maintainer of the open-source python package <a href="https://github.com/ronikobrosly/causal-curve">causal-curve</a>, and I also maintain this <a href="https://github.com/ronikobrosly/awesome-data-leadership">ridiculously long list of resources for data leaders</a>.</p>
-<p>I've also spoken at multiple data science conferences, primarily on the topic of causality and data.</p>
-<p>What I do and love:</p>
-<ul>
-<li>building out an organization's data strategy</li>
-<li>helping growing orgs become more data-driven and establishing excellent processes/patterns</li>
-<li>building teams and mentoring (and learning from) junior and senior data analysts, scientists, and engineers</li>
-<li>architecting data and machine learning platforms</li>
-<li>keeping up to date with the constantly evolving modern data-stack</li>
-</ul>
-<p>I love meeting people so please don't hesitate to reach out!</p>
 
+<div class="terminal-card">
+  <header class="card-title">causal-curve</header>
+  <div class="card-body">
+    
+<div class="card-img-top bg-light">
+  
+
+
+
+
+
+
+</div>
+
+    <p>A python package for performing causal inference when a treatment is continuous.</p>
+
+    
+    
+    <p>There are many implemented methods to perform causal inference when your intervention of interest is binary, but few methods exist to handle continuous treatments.</p>
+<p>This is unfortunate because there are many scenarios (in industry and research) where these methods would be useful. For example, when you would like to:</p>
+<ul>
+<li>Estimate the causal response to increasing or decreasing the price of a product across a wide range.</li>
+<li>Understand how the number of minutes per week of aerobic exercise causes positive health outcomes.</li>
+<li>Estimate how decreasing order wait time will impact customer satisfaction, after controlling for confounding effects.</li>
+<li>Estimate how changing neighborhood income inequality (Gini index) could be causally related to neighborhood crime rate.</li>
+</ul>
+<p><img src="causal_curve.webp" alt=""></p>
+<p>This library attempts to address this gap, providing tools to estimate causal curves (AKA causal dose-response curves). Both continuous and binary outcomes can be modeled against a continuous treatment.</p>
+
+    
+    
+    
+    <p>The GitHub repository can be found <a href="https://github.com/ronikobrosly/causal-curve">here</a>.</p>
+    
+    
   </div>
 </div>
+
 
         </div>
 
