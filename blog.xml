@@ -16,11 +16,15 @@
 &lt;p&gt;5) The final startup is "MTRX": believes data will be their competitive edge. They've taken all of the MBA courses at Wharton data-driven business practices. Their prior experience is on par with that of Bolder’s founders, and has taught them that fashion is fickle and hard to predict. The most iconic brands, they say, will be built by companies that find and respond to new opportunities in the market before anyone else does. Fashion may be art, but running a business is a science.&lt;/p&gt;
 &lt;p&gt;Benn actually polled his readers for which company would be most succesful, but frustratingly I can't find the results!&lt;/p&gt;
 &lt;p&gt;To get to the point though, Benn makes the following statement:&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Honestly, if it’s my money, MTRX ain’t getting it. My stack rank is 1) Prodigious Daughter, 2) Bolder, 3) Square Corner, 4) MTRX, and 5) Long View. For early to mid-stage companies, give me talent and intuition over everything; if not that, I’ll trade away analytical rigor for speed and decisiveness.&lt;/p&gt;
-&lt;p&gt;Still, I don’t think that the statement that “data-driven companies win” is entirely wrong—it’s just data operates through a different mechanism than we might assume.&lt;/p&gt;
-&lt;p&gt;Most often, we say that data helps us make better decisions. We can devise better strategies, and be smarter operators. The implication here is that when we’re faced with a choice of what to do, with data, we’re wise; without it, we’re foolish.&lt;/p&gt;
-&lt;p&gt;I think this dramatically overstates data’s usefulness. Business problems are extraordinarily complicated, and analytical recommendations are mostly educated guesses. Great data teams likely make somewhat better guesses, but at the end of the day, we’re all still gambling.&amp;lt;/b&amp;gt;&lt;/p&gt;
-&lt;p&gt;I mostly agree with him.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+Honestly, if it’s my money, MTRX ain’t getting it. My stack rank is 1) Prodigious Daughter, 2) Bolder, 3) Square Corner, 4) MTRX, and 5) Long View. For early to mid-stage companies, give me talent and intuition over everything; if not that, I’ll trade away analytical rigor for speed and decisiveness. 
+
+Still, I don’t think that the statement that “data-driven companies win” is entirely wrong—it’s just data operates through a different mechanism than we might assume. 
+
+Most often, we say that data helps us make better decisions. We can devise better strategies, and be smarter operators. The implication here is that when we’re faced with a choice of what to do, with data, we’re wise; without it, we’re foolish. 
+
+I think this dramatically overstates data’s usefulness. Business problems are extraordinarily complicated, and analytical recommendations are mostly educated guesses. Great data teams likely make somewhat better guesses, but at the end of the day, we’re all still gambling.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I mostly agree with him.&lt;/p&gt;
 &lt;p&gt;How would we even go about rigoriously testing whether a data-driven company has an edge?&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Run an experiment? It's obviously not feasible to create a batch of new startups and randomize them to embrace the best data practices vs no&lt;/li&gt;
