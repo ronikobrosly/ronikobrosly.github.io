@@ -25,8 +25,8 @@
 
     
 
-<meta property="og:title" content="The illusiveness of automated causal discovery">
-<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/causal_discovery_illusion' />
+<meta property="og:title" content="Some initial lessons from using Cursor to build a production web app">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/lessons_from_cursor' />
 
 
 
@@ -73,7 +73,7 @@
 
 </head>
 
-<title>The illusiveness of automated causal discovery - Roni Kobrosly's Personal Site</title>
+<title>Some initial lessons from using Cursor to build a production web app - Roni Kobrosly's Personal Site</title>
 
 <body>
     <div class="container">
@@ -166,7 +166,7 @@
 <div class="terminal-card">
   <header id="post_title" name="post_title">
 <!-- Set title style -->
-<span name="title" id="title">The illusiveness of automated causal discovery</span>
+<span name="title" id="title">Some initial lessons from using Cursor to build a production web app</span>
 </header>
   <div class="card-body">
     
@@ -178,19 +178,19 @@
     Roni Kobrosly
     
     on
-    <span id="pub_date" name="pub_date">2024-11-25</span>
+    <span id="pub_date" name="pub_date">2025-01-02</span>
 
     
     | tags:
     <!-- Append tags after author -->
     <span class="boxed" id="tags" name="tags">
-      <a class="tags" href="../../../../tag/machine learning/">
-        machine learning
+      <a class="tags" href="../../../../tag/generative ai/">
+        generative ai
       </a>
     </span>
     <span class="boxed" id="tags" name="tags">
-      <a class="tags" href="../../../../tag/causal inference/">
-        causal inference
+      <a class="tags" href="../../../../tag/engineering/">
+        engineering
       </a>
     </span>
     
@@ -205,41 +205,33 @@
     
 
     <span id="post_body" name="post_body">
-      <p>If you're given only a tabular dataset and a target variable of interest, but with no domain knowledge around what the data represents or how it was generated, you can do a few interesting things. Let's say you work at a rideshare startup and have a Postgres table like the following, and your target variable of interest is ridership for your carshare service. All you know is that rides in any time interval is important to the business and that it's good for the business to maximize this (duh):</p>
-<p><img src="sample_data.webp" alt=""></p>
-<p>Given this data and no domain knowledge, you can:</p>
+      <p>Happy New Year!</p>
+<p>Over the holiday break, I had the opportunity to try out the <a href="https://www.cursor.com/">Cursor Pro</a>, one of the newer and more discussed GenAI coding assistants and IDE. It is meant to be like GitHub CoPilot, but the idea is it is its own IDE and AI is infused into each aspect of it:</p>
 <ul>
-<li>Explore the data, identify missing values, understand distributions, collect basic summary statistics (the mean, the median, skew, etc.) </li>
-<li>Look at statistical correlations between all variables and your target variable</li>
-<li>Find and visualize groupings (AKA clusters) of observations around any combination of variables; or along these lines, identify anomalous observations. </li>
-<li>Build a ML model (from super simple to something complex) to predict values of the target variable given the other variables. </li>
-<li>Generate new, sythetic look-alike data that mimics all of the univariate and joint distributions in the original data.</li>
+<li>It auto-completes lines</li>
+<li>It auto-corrects syntax errors</li>
+<li>You can discuss the entire codebase or just a specific line (by selecting it via cursor)</li>
+<li>It will automatically compose files based on your description</li>
+<li>It is multi-modal so it will happily ingest images as well as your text descriptions or package documentation</li>
+<li>You can select which premium, foundation model to use (in the Pro addition) </li>
 </ul>
-<p>Sounds impressive but... the translation of these things into real world value is near null. Even if you could predict ridership in this data really well, are the predictors leading or lagging indicators (if they're the latter, your model is pointless)? Are any of the predictors actionable/intervenable by the business? What was the data generating process and is this data sound?</p>
-<hr>
-<h1 id="enter-domain-knowledge-and-causality">Enter: domain knowledge and causality</h1><hr>
-<p>Having domain knowledge around each of the above factors would be greatly helpful, and maybe you could glean some insights from that data or potentially create usable ML from it. That's good and well 🙌🏼.</p>
-<p>Causal graphs can go above and beyond this and are immensely powerful. They allow us to formally structural our knowledge of some topic by mapping out causes and effects. See this simple causal graph that <a href="https://eng.lyft.com/causal-forecasting-at-lyft-part-1-14cca6ff3d6d">Lyft uses in thinking through the causality of predicting ridership</a>.</p>
-<p><img src="causal_graph.webp" alt=""></p>
-<p>In other words, causal graphs allow us to formally encode our domain knowledge on some topic. Having a true causal understanding of the mechanisms behind some business process along with real data enables us to:</p>
+<p>What use I put it toward? I have been slowly working on a side-project named Data Compass AI for some time (eventually it'll live at <a href="http://www.datacompass.ai/">datacompass.ai</a>). The purpose of Data Compass AI is to make the data maturity of organizations more transparent and to help rate their data journey. Think Glassdoor or Charity Navigator but focused on "data maturity" (is data centralized and clean? Are data team members first-class citizens in the tech org? Are ML models or dashboards making a quantifiable impact?). I'll describe more about the idea in a future blog post once it's up in production at <a href="http://www.datacompass.ai/">datacompass.ai</a>.</p>
+<p>While the domain the app focuses on is around data engineering and science, building Data Compass AI is essentially a straight up software engineering task. I've primarily relied on simple small python frameworks like <a href="https://flask.palletsprojects.com/en/stable/">Flask</a> for creating APIs and simple demo web apps, but a proper dynamic, production web app would need something beefier with a ORM, easy to install authentication features, security measures like rate-limiting logins, etc. I was somewhat familiar with the <a href="https://www.djangoproject.com/">Django</a> python framework but I was hoping to learn more about it through Cursor (and better understand Cursor workflows in the process).</p>
+<p>There are so many places to begin w.r.t. Cursor. At PyData NYC 2024 a Microsoft CoPilot product owner gave a keynote talk on how the shift from the current developer workflow to a AI-enhanced developer workflow would mean shifts from:</p>
+<pre><code>
+* Coding --> Exploring
+* Building --> Evaluating
+* Testing --> Optimizing
+</code></pre><p>I fully agree with this sentiment now. I see Cursor and other AI coding assistants as force multipliers rather than something that will replace engineers (at least in the short and medium-term future). By which, I mean this: if a junior developer has weak skills and intuitions around coding, design, and architecture of, say, level <b>1</b>, it results in 5x improvement in speed of development, resulting in an outcome of <b>5</b>. A seasoned senior engineer, of skill 10, could produce an outcome of <b>50</b>. In other words, I feel like I was able to learn the Django framework and produce a near-production ready app at 5x speed.</p>
+<p><img src="robot.webp" alt=""></p>
+<p>Here are some of the lessons I learned from the experience, which I think are partly specific to Cursor and partly general around AI-assisted software development:</p>
 <ul>
-<li>Make predictive models that are way more actionable </li>
-<li>Allow us to make stronger inference around the effects of individual factors </li>
+<li>It helps to periodically remind the agent the purpose of what it is doing. Particularly if you step away from the laptop for a while or open a new chat. Cursor with <code>claude sonnet 3.5</code> running under the hood did a good job of retaining holistic context of the project work in chunks of a few hours, but if a significantly new task was asked of it, </li>
+<li>Good foundational engineering skills are still a must. I found that it would occasionally forget that certain files already existed and try to re-create them with slightly new names. That's an obvious example. On the more subtle side, the Cursor-claude combo would occasionally re-create functions and build off of them, resulting in subtley messy code. The data models it produced (even after a few iterations of back and forth in chat) needed to be tweaked to be more elegant and for the foreign keys to make more sense.</li>
+<li>A sort of continuation of the prior bullet: I found that each major suggestion (creation of a big class, etc) required about 5% reworking to make things more elegant/cleaner or to clean up bugs.</li>
+<li>Complex integration tests are no longer daughting. I think it's been known for some time that these agents are great at writing simple-ish unit tests (which is great!), but I've always found integration tests to be extremely daughting. With relative ease, the Cursor-claude combo was able to create a temporary test database, spin up a browser via Selenium, mocking various things, and literally step through the account-creation process with a headless browser. That's magic. A task like that might have taken me 5+ hours previously as there are so many little details / complexity involved. </li>
+<li>The Cursor-claude combo was incredibly helpful at debugging in cases where neither I or it could figure out an issue. Yes, I would be able to write <code>print</code> statements to the terminal or check on the database to see if an intermediate processing step worked, but I found the agent was particularly great at creating temporary debugging lines and then removing them afterwards. It could even help me interpret these issues well. I employ D3 in the app on the results page and I'm only weakly-to-moderately experienced with JS. The agent was a godsend in those instances.</li>
 </ul>
-<p>The challenge is, <b>mapping causality in data requires time, becoming a SME in your area of interest, and it's not really scalable</b>. It's not the kind of thing you can throw into an algorithm to figure out... but it hasn't stopped people from trying. There is an entire field of research dedicating to trying to determine causality (to draw up a causal graph like the above one from Lyft), from data. It's sometimes named <a href="https://link.springer.com/article/10.1007/s10208-022-09581-9">causal structure learning or causal discovery</a>. There is so much interest in it that there are even <a href="https://hub.crunchdao.com/competitions/causality-discovery">competitions</a> to see if the world's hackers and researchers can finally crack it (correctly determine a causal graph given only unmarked data). Winning first place in the following causal discovery data competition was $40k USD.</p>
-<p><img src="competition.webp" alt=""></p>
-<p>I get the drive behind it. It promises a scalable way to learn causality from data and algorithmically do what an SME could do. The only problem is, I believe <b>this fundamentally not possible</b>. By the way, the top performing approach used in the above dataset only achieved around 77% accuracy in correctly specifying the true DAG, which is <b>abysmal</b>. It would be incredibly challenging to do useful modeling with a graph that is 77% accurate in terms of edge placement.</p>
-<hr>
-<h1 id="el-dorado-doesn-t-exist">El Dorado doesn't exist</h1><hr>
-<p><a href="https://arxiv.org/pdf/2305.10032">Many attempts have been made to automate causal discovery given only a dataset</a>. They range from simple statistical comparisons of variable triplets (if I hold variable Z constant, does it change the relationship the relationship of X and Y?), to starting with a random graph and permuting it until it looks like something that is scored as more likely to have generated the observed data, to, more recently, reframing the task as a <a href="https://arxiv.org/abs/1803.01422">continuous optimization problem</a>. All in all, there are probably 20-ish unique methods proposed for automating this task and 100s open source implementations of these methods available online. Through personal experience, given the same initial dataset, if I picked 100 of the top-starred implementations and tried to generate a causal graph, I would get 100 vastly-different results. I could try to formally demonstrate this here but I've gone through this exercise so many times in the past it doesn't feel worth the time.</p>
-<p>There are some secondary approaches people have proposed to make up for this instability and get closer to the real result:</p>
-<ul>
-<li>Use these approaches to generate an initial graph and then apply domain knowledge to prune or add causes and effects as needed</li>
-<li>Use an approach where you identify areas of the most uncertainty in the causal graph, and then try some interventions, explore additional data in those areas.</li>
-<li>Use an approach put forward by Yoshua Bengio's group and <a href="https://arxiv.org/pdf/2402.01207">employ LLMs to take in a corpus of text and augment or build your causal graph</a>. </li>
-</ul>
-<p>The problem is in doing these approaches you lose scalability benefit you were originally going for or in the case of the third approach the results still aren't accurate enough to be useful.</p>
-<p>For now, I just don't think this sort of automated causal discovery is possible. Ultimately, if the AI community is able to achieve true general artificial intelligence, it may be possible for this AI to really learn causality via exploration and research... but it's anyone's guess whether we'll get there.</p>
 
     </span>
 
