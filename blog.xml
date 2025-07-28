@@ -17,36 +17,52 @@
 &lt;li&gt;Instructions to continually update the README.md and CLAUDE.md files as code is modified.&lt;/li&gt;
 &lt;li&gt;Instructions on the preferred way to install new third-party libraries (via &lt;code&gt;uv&lt;/code&gt;) and a reminder to continually update dependency text files. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;code: |
-```&lt;/p&gt;
-&lt;h1 id="claude-md-development-guidance"&gt;CLAUDE.md - Development Guidance&lt;/h1&gt;&lt;h2 id="project-overview"&gt;Project Overview&lt;/h2&gt;&lt;p&gt;This project is an automated job checking and application pipeline that scrapes job websites, identifies relevant roles, and generates tailored resumes and cover letters. The system uses AI-powered job classification, intelligent document generation, and comprehensive data management.&lt;/p&gt;
-&lt;h2 id="the-golden-rule"&gt;The Golden Rule&lt;/h2&gt;&lt;p&gt;When unsure about implementation details, ALWAYS ask the developer.&lt;/p&gt;
-&lt;h2 id="critical-architecture-decisions"&gt;Critical Architecture Decisions&lt;/h2&gt;&lt;h3 id="core-pipeline-flow"&gt;Core Pipeline Flow&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Job Scraping&lt;/strong&gt;: Collect new job postings from configured websites (src/scrapers/)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Data Persistence&lt;/strong&gt;: Store job data in SQLite database with deduplication (src/database/)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Relevance Analysis&lt;/strong&gt;: ML/NLP-based job matching against user profile (src/analysis/)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Job Classification&lt;/strong&gt;: AI-powered role classification using Claude AI (src/analysis/job_classifier.py)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Document Generation&lt;/strong&gt;: Generate customized LaTeX resumes and compile to PDF (src/templates/)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Email Reporting&lt;/strong&gt;: Send automated reports with generated PDFs (planned)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Data Cleanup&lt;/strong&gt;: Remove old job records and optimize storage&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="key-components"&gt;Key Components&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Database Layer&lt;/strong&gt;: Three-table schema (JobDetail, JobSource, ScrapingRun) with full audit trails&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Web Scrapers&lt;/strong&gt;: Multi-site data collection with anti-detection measures&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Analysis Engine&lt;/strong&gt;: AI-powered job classification and relevance scoring&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Document Generation&lt;/strong&gt;: LaTeX template processing and PDF compilation&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Configuration System&lt;/strong&gt;: Environment variables + YAML configuration files&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Pipeline Orchestrator&lt;/strong&gt;: Central coordinator in src/&lt;strong&gt;main&lt;/strong&gt;.py&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="input-requirements"&gt;Input Requirements&lt;/h3&gt;&lt;p&gt;The system requires:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Environment Variables&lt;/strong&gt;: API keys and service credentials in secrets.env&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;LaTeX Templates&lt;/strong&gt;: Resume templates in templates/resume/&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Configuration Files&lt;/strong&gt;: User profile, skills, and scraping configuration&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Database&lt;/strong&gt;: SQLite database with three-table schema&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="project-structure"&gt;Project Structure&lt;/h2&gt;&lt;p&gt;src/                             # Source code
-├── &lt;strong&gt;main&lt;/strong&gt;.py                  # Main pipeline entry point
+&lt;p&gt;code: |&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;```
+# CLAUDE.md - Development Guidance
+
+## Project Overview
+
+This project is an automated job checking and application pipeline that scrapes job websites, identifies relevant roles, and generates tailored resumes and cover letters. The system uses AI-powered job classification, intelligent document generation, and comprehensive data management.
+
+## The Golden Rule
+
+When unsure about implementation details, ALWAYS ask the developer.
+
+## Critical Architecture Decisions
+
+### Core Pipeline Flow
+
+1. **Job Scraping**: Collect new job postings from configured websites (src/scrapers/)
+2. **Data Persistence**: Store job data in SQLite database with deduplication (src/database/)
+3. **Relevance Analysis**: ML/NLP-based job matching against user profile (src/analysis/)
+4. **Job Classification**: AI-powered role classification using Claude AI (src/analysis/job_classifier.py)
+5. **Document Generation**: Generate customized LaTeX resumes and compile to PDF (src/templates/)
+6. **Email Reporting**: Send automated reports with generated PDFs (planned)
+7. **Data Cleanup**: Remove old job records and optimize storage
+
+### Key Components
+
+- **Database Layer**: Three-table schema (JobDetail, JobSource, ScrapingRun) with full audit trails
+- **Web Scrapers**: Multi-site data collection with anti-detection measures
+- **Analysis Engine**: AI-powered job classification and relevance scoring
+- **Document Generation**: LaTeX template processing and PDF compilation
+- **Configuration System**: Environment variables + YAML configuration files
+- **Pipeline Orchestrator**: Central coordinator in src/__main__.py
+
+### Input Requirements
+
+The system requires:
+- **Environment Variables**: API keys and service credentials in secrets.env
+- **LaTeX Templates**: Resume templates in templates/resume/
+- **Configuration Files**: User profile, skills, and scraping configuration
+- **Database**: SQLite database with three-table schema
+
+## Project Structure
+
+
+src/                             # Source code
+├── __main__.py                  # Main pipeline entry point
 ├── analysis/                    # Job analysis and classification
 │   ├── config.py                # Analysis configuration loader
 │   ├── job_classifier.py        # AI-powered job classification
@@ -76,228 +92,300 @@
 │   ├── latex_processor.py       # LaTeX compilation to PDF
 │   └── resume_engine.py         # Resume template processing
 └── utils/                       # Shared utilities
-    └── config.py                # Configuration management&lt;/p&gt;
-&lt;p&gt;config/                          # Configuration files
+    └── config.py                # Configuration management
+
+config/                          # Configuration files
 ├── analysis/                    # Job analysis configuration
 │   ├── scoring_weights.yaml     # Scoring algorithm weights
 │   ├── skill_mappings.yaml      # User skills and experience mappings
 │   ├── job_filters.yaml         # Job filtering criteria
 │   └── user_profile.yaml        # User profile and preferences
 └── sites/                       # Job site configurations
-    └── sites_config.py          # Scraping site definitions&lt;/p&gt;
-&lt;p&gt;data/                            # Data storage
+    └── sites_config.py          # Scraping site definitions
+
+data/                            # Data storage
 ├── alembic/                     # Database migration files
 ├── exports/                     # Generated PDFs and LaTeX files
-└── jobs/                        # SQLite database location&lt;/p&gt;
-&lt;p&gt;templates/                       # Document templates
+└── jobs/                        # SQLite database location
+
+templates/                       # Document templates
 └── resume/                      # LaTeX resume templates
-    └── Awesome-CV-master/       # LaTeX resume template system&lt;/p&gt;
-&lt;p&gt;tests/                           # Test suite
+    └── Awesome-CV-master/       # LaTeX resume template system
+
+tests/                           # Test suite
 ├── conftest.py                  # Pytest configuration and fixtures
 ├── fixtures/                    # Test data and sample files
 ├── integration/                 # Integration tests
-└── unit/                        # Unit tests&lt;/p&gt;
-&lt;p&gt;logs/                            # Application logs (created at runtime)
-└── application/                 # Pipeline execution logs&lt;/p&gt;
-&lt;p&gt;scripts/                         # Setup and maintenance scripts
+└── unit/                        # Unit tests
+
+logs/                            # Application logs (created at runtime)
+└── application/                 # Pipeline execution logs
+
+scripts/                         # Setup and maintenance scripts
 ├── migration/                   # Database migration utilities
 └── setup/                       # Environment setup scripts
     ├── init_database.py         # Database initialization
-    └── setup_job_sources.py     # Job source configuration&lt;/p&gt;
-&lt;h2 id="code-style-and-patterns"&gt;Code Style and Patterns&lt;/h2&gt;&lt;h3 id="import-organization"&gt;Import Organization&lt;/h3&gt;&lt;h1 id="built-in-python-packages-alphabetical"&gt;Built-in Python packages (alphabetical)&lt;/h1&gt;&lt;p&gt;from collections import defaultdict, namedtuple, OrderedDict
+    └── setup_job_sources.py     # Job source configuration
+
+
+## Code Style and Patterns
+
+### Import Organization
+
+# Built-in Python packages (alphabetical)
+from collections import defaultdict, namedtuple, OrderedDict
 import logging
 import pdb
-import smtplib&lt;/p&gt;
-&lt;h1 id="third-party-packages-alphabetical"&gt;Third-party packages (alphabetical)&lt;/h1&gt;&lt;p&gt;import numpy as np
+import smtplib 
+
+# Third-party packages (alphabetical)
+import numpy as np
 import pandas as pd
-from scipy.stats import cauchy, gamma, triang&lt;/p&gt;
-&lt;h1 id="local-module-imports-alphabetical"&gt;Local module imports (alphabetical)&lt;/h1&gt;&lt;p&gt;from src.localmodule import SomeClass
-from tests.conftest import some_fixture&lt;/p&gt;
-&lt;h3 id="documentation-standards"&gt;Documentation Standards&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Module Docstrings&lt;/strong&gt;: 1-2 sentence description at top of each .py file&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Function Docstrings&lt;/strong&gt;: Follow this format:
+from scipy.stats import cauchy, gamma, triang
+
+# Local module imports (alphabetical)
+from src.localmodule import SomeClass
+from tests.conftest import some_fixture
+
+
+### Documentation Standards
+- **Module Docstrings**: 1-2 sentence description at top of each .py file
+- **Function Docstrings**: Follow this format:
 def calculate_area(length: float, width: float) -&amp;gt; float:
-  """Calculates the area of a rectangle.&lt;/p&gt;
-&lt;p&gt;Args:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  length (float): The length of the rectangle.
-  width (float): The width of the rectangle.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Returns:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  float: The calculated area of the rectangle.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;"""&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="anchor-comments"&gt;Anchor Comments&lt;/h3&gt;&lt;p&gt;Use anchor comments for AI/developer reference:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;AIDEV-NOTE: - Important implementation details&lt;/li&gt;
-&lt;li&gt;AIDEV-TODO: - Tasks that need completion&lt;/li&gt;
-&lt;li&gt;AIDEV-QUESTION: - Questions about implementation&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Important&lt;/strong&gt;: Before scanning files, grep for existing AIDEV-* anchors in relevant subdirectories.&lt;/p&gt;
-&lt;h3 id="guidelines"&gt;Guidelines&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Type Hints&lt;/strong&gt;: Required for all function parameters and return values&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt;: Unit tests required for all new code with &amp;gt;90% coverage&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Error Handling&lt;/strong&gt;: Use custom exceptions from src.database.exceptions&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Logging&lt;/strong&gt;: Use structured logging throughout all components&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Configuration&lt;/strong&gt;: Prefer environment variables for sensitive data&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="database-architecture"&gt;Database Architecture&lt;/h2&gt;&lt;h3 id="schema-overview"&gt;Schema Overview&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;jobs_details&lt;/strong&gt;: Core job information with classification metadata&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;job_sources&lt;/strong&gt;: Website configuration and scraping status&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;scraping_runs&lt;/strong&gt;: Pipeline execution tracking and performance metrics&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="key-database-operations"&gt;Key Database Operations&lt;/h3&gt;&lt;p&gt;from src.database.service import JobDatabase&lt;/p&gt;
-&lt;h1 id="initialize-database-service"&gt;Initialize database service&lt;/h1&gt;&lt;p&gt;job_db = JobDatabase()&lt;/p&gt;
-&lt;h1 id="core-operations"&gt;Core operations&lt;/h1&gt;&lt;p&gt;job = job_db.create_job(job_data)
+    """Calculates the area of a rectangle.
+
+    Args:
+        length (float): The length of the rectangle.
+        width (float): The width of the rectangle.
+
+    Returns:
+        float: The calculated area of the rectangle.
+    """
+
+### Anchor Comments
+Use anchor comments for AI/developer reference:
+- AIDEV-NOTE: - Important implementation details
+- AIDEV-TODO: - Tasks that need completion
+- AIDEV-QUESTION: - Questions about implementation
+
+**Important**: Before scanning files, grep for existing AIDEV-* anchors in relevant subdirectories.
+
+### Guidelines
+- **Type Hints**: Required for all function parameters and return values
+- **Testing**: Unit tests required for all new code with &amp;gt;90% coverage
+- **Error Handling**: Use custom exceptions from src.database.exceptions
+- **Logging**: Use structured logging throughout all components
+- **Configuration**: Prefer environment variables for sensitive data
+
+## Database Architecture
+
+### Schema Overview
+- **jobs_details**: Core job information with classification metadata
+- **job_sources**: Website configuration and scraping status
+- **scraping_runs**: Pipeline execution tracking and performance metrics
+
+### Key Database Operations
+from src.database.service import JobDatabase
+
+# Initialize database service
+job_db = JobDatabase()
+
+# Core operations
+job = job_db.create_job(job_data)
 jobs = job_db.get_jobs_by_criteria({'is_relevant': True})
-result = job_db.batch_create_jobs_with_deduplication(job_batch)&lt;/p&gt;
-&lt;h1 id="development-helpers"&gt;Development helpers&lt;/h1&gt;&lt;p&gt;reset_results = job_db.reset_all_job_processing_status()
-relevance_results = job_db.reset_all_job_relevance()&lt;/p&gt;
-&lt;h2 id="common-commands"&gt;Common Commands&lt;/h2&gt;&lt;h3 id="development-workflow"&gt;Development Workflow&lt;/h3&gt;&lt;h1 id="setup-environment"&gt;Setup environment&lt;/h1&gt;&lt;p&gt;uv sync                                     # Install dependencies
+result = job_db.batch_create_jobs_with_deduplication(job_batch)
+
+# Development helpers
+reset_results = job_db.reset_all_job_processing_status()
+relevance_results = job_db.reset_all_job_relevance()
+
+## Common Commands
+
+### Development Workflow
+# Setup environment
+uv sync                                     # Install dependencies
 python scripts/setup/init_database.py      # Initialize database
-python scripts/setup/setup_job_sources.py # Setup job sources&lt;/p&gt;
-&lt;h1 id="development-execution"&gt;Development execution&lt;/h1&gt;&lt;p&gt;python -m src --skip-scraping              # Process existing jobs (auto-resets processing)
+python scripts/setup/setup_job_sources.py # Setup job sources
+
+# Development execution
+python -m src --skip-scraping              # Process existing jobs (auto-resets processing)
 python -m src --test_trial                 # Limited test run (3 jobs from 1 site)
-python -m src --skip-email --log-level DEBUG  # Debug mode&lt;/p&gt;
-&lt;h1 id="pipeline-options"&gt;Pipeline options&lt;/h1&gt;&lt;p&gt;python -m src --log-level DEBUG            # Enable debug logging
+python -m src --skip-email --log-level DEBUG  # Debug mode
+
+# Pipeline options
+python -m src --log-level DEBUG            # Enable debug logging
 python -m src --skip-email                 # Skip email reporting
 python -m src --skip-analysis              # Skip job relevance analysis
 python -m src --skip-documents             # Skip document generation
 python -m src --cleanup-only               # Only run data cleanup
-python -m src --reset-processing           # Reset all jobs to unprocessed&lt;/p&gt;
-&lt;h1 id="database-management"&gt;Database management&lt;/h1&gt;&lt;p&gt;cd data &amp;amp;&amp;amp; alembic upgrade head            # Apply migrations
+python -m src --reset-processing           # Reset all jobs to unprocessed
+
+# Database management
+cd data &amp;amp;&amp;amp; alembic upgrade head            # Apply migrations
 cd data &amp;amp;&amp;amp; alembic current                 # Show current migration
 cd data &amp;amp;&amp;amp; alembic history                 # Show migration history
-cd data &amp;amp;&amp;amp; alembic revision --autogenerate -m "description"  # Create migration&lt;/p&gt;
-&lt;h1 id="database-inspection"&gt;Database inspection&lt;/h1&gt;&lt;p&gt;sqlite3 ./data/jobs/jobs.db               # Interactive SQLite session&lt;/p&gt;
-&lt;h1 id="inside-sqlite3"&gt;Inside sqlite3:&lt;/h1&gt;&lt;p&gt;.mode box                                  # Pretty print mode
+cd data &amp;amp;&amp;amp; alembic revision --autogenerate -m "description"  # Create migration
+
+# Database inspection
+sqlite3 ./data/jobs/jobs.db               # Interactive SQLite session
+# Inside sqlite3:
+.mode box                                  # Pretty print mode
 .tables                                    # Show all tables
 .schema                                    # Show table schemas
-SELECT * FROM jobs_details LIMIT 5;       # Query jobs&lt;/p&gt;
-&lt;h1 id="testing"&gt;Testing&lt;/h1&gt;&lt;p&gt;python -m pytest                          # Run all tests
+SELECT * FROM jobs_details LIMIT 5;       # Query jobs
+
+# Testing
+python -m pytest                          # Run all tests
 python -m pytest tests/unit/              # Unit tests only
 python -m pytest tests/integration/       # Integration tests only
-python -m pytest --cov=src                # Tests with coverage&lt;/p&gt;
-&lt;h1 id="code-quality"&gt;Code quality&lt;/h1&gt;&lt;p&gt;ruff format .                             # Format code
+python -m pytest --cov=src                # Tests with coverage
+
+# Code quality
+ruff format .                             # Format code
 ruff check .                              # Lint code
-ruff check --fix .                        # Auto-fix linting issues&lt;/p&gt;
-&lt;h3 id="database-schema-inspection"&gt;Database Schema Inspection&lt;/h3&gt;&lt;p&gt;-- View job details with processing status
+ruff check --fix .                        # Auto-fix linting issues
+
+### Database Schema Inspection
+-- View job details with processing status
 SELECT role_title, company_name, is_relevant, is_processed, 
        job_classification, classification_confidence 
 FROM jobs_details 
-ORDER BY created_at DESC LIMIT 10;&lt;/p&gt;
-&lt;p&gt;-- Check relevance statistics
+ORDER BY created_at DESC LIMIT 10;
+
+-- Check relevance statistics
 SELECT 
     COUNT(*) as total_jobs,
     SUM(CASE WHEN is_relevant = 1 THEN 1 ELSE 0 END) as relevant_jobs,
     SUM(CASE WHEN is_processed = 1 THEN 1 ELSE 0 END) as processed_jobs
-FROM jobs_details;&lt;/p&gt;
-&lt;p&gt;-- View scraping run history
+FROM jobs_details;
+
+-- View scraping run history
 SELECT run_id, status, start_time, total_jobs_found, total_new_jobs 
 FROM scraping_runs 
-ORDER BY start_time DESC LIMIT 5;&lt;/p&gt;
-&lt;h2 id="development-notes"&gt;Development Notes&lt;/h2&gt;&lt;h3 id="pipeline-execution-phases"&gt;Pipeline Execution Phases&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Initialization&lt;/strong&gt;: Setup logging, database connection, run tracking&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Scraping&lt;/strong&gt; (optional): Collect new job postings with anti-detection&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Storage&lt;/strong&gt;: Batch insertion with deduplication and validation&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Analysis&lt;/strong&gt;: Relevance scoring and AI-powered classification&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Documents&lt;/strong&gt;: LaTeX template processing and PDF generation&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt;: Automated reporting with attachments (planned)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cleanup&lt;/strong&gt;: Remove old records and optimize storage&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="development-friendly-features"&gt;Development-Friendly Features&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Skip Scraping Mode&lt;/strong&gt;: --skip-scraping automatically resets processing status&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Modular Execution&lt;/strong&gt;: Each phase can be skipped for targeted testing&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Comprehensive Logging&lt;/strong&gt;: Detailed execution logs with structured output&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Test Modes&lt;/strong&gt;: Limited scraping for development and testing&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Error Recovery&lt;/strong&gt;: Graceful handling of failures with detailed error reporting&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="configuration-management"&gt;Configuration Management&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Environment Variables&lt;/strong&gt;: Sensitive data in secrets.env (gitignored)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;YAML Configuration&lt;/strong&gt;: User profile, skills, and analysis settings&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Dynamic Loading&lt;/strong&gt;: Configuration loaded on demand with caching&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Fallback Support&lt;/strong&gt;: Environment variables override YAML settings&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="ai-integration"&gt;AI Integration&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Claude API&lt;/strong&gt;: Job classification and keyword extraction&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Confidence Scoring&lt;/strong&gt;: AI provides confidence levels for decisions&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reasoning Explanations&lt;/strong&gt;: Detailed explanations for classification decisions&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Template Selection&lt;/strong&gt;: AI-driven template selection based on job type&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="anti-detection-measures"&gt;Anti-Detection Measures&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Random Delays&lt;/strong&gt;: 3-8 second delays between requests&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;User Agent Rotation&lt;/strong&gt;: Rotating browser identities&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Exponential Backoff&lt;/strong&gt;: Intelligent retry strategies&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Session Management&lt;/strong&gt;: Proper HTTP session handling&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="important-implementation-notes"&gt;Important Implementation Notes&lt;/h2&gt;&lt;h3 id="adding-new-job-sites"&gt;Adding New Job Sites&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;Add configuration to config/sites/sites_config.py&lt;/li&gt;
-&lt;li&gt;Create scraper class in src/scrapers/sites/new_site_scraper.py&lt;/li&gt;
-&lt;li&gt;Register in ScraperManager.create_scraper() method&lt;/li&gt;
-&lt;li&gt;Add comprehensive tests in tests/unit/scrapers/&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="extending-analysis-engine"&gt;Extending Analysis Engine&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;Modify scoring weights in config/analysis/scoring_weights.yaml&lt;/li&gt;
-&lt;li&gt;Update user skills in config/analysis/skill_mappings.yaml&lt;/li&gt;
-&lt;li&gt;Customize job filters in config/analysis/job_filters.yaml&lt;/li&gt;
-&lt;li&gt;Customize analysis logic in src/analysis/relevance_analyzer.py&lt;/li&gt;
-&lt;li&gt;Add new classification types in src/analysis/job_classifier.py&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="database-schema-evolution"&gt;Database Schema Evolution&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;Modify models in src/database/models/&lt;/li&gt;
-&lt;li&gt;Generate migration: cd data &amp;amp;&amp;amp; alembic revision --autogenerate -m "description"&lt;/li&gt;
-&lt;li&gt;Review and edit generated migration file&lt;/li&gt;
-&lt;li&gt;Apply migration: cd data &amp;amp;&amp;amp; alembic upgrade head&lt;/li&gt;
-&lt;li&gt;Update related service methods in src/database/service.py&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="document-generation-pipeline"&gt;Document Generation Pipeline&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Classification&lt;/strong&gt;: AI determines job type (IC vs Leadership)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Template Selection&lt;/strong&gt;: Choose appropriate LaTeX template&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Content Customization&lt;/strong&gt;: Modify template with job-specific keywords&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Compilation&lt;/strong&gt;: Use xelatex to generate PDF&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;File Management&lt;/strong&gt;: Save to data/exports/ with descriptive names&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="security-and-best-practices"&gt;Security and Best Practices&lt;/h2&gt;&lt;h3 id="security-standards"&gt;Security Standards&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;API Keys&lt;/strong&gt;: Store in environment variables, never commit to git&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Database&lt;/strong&gt;: Use parameterized queries to prevent injection&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Web Scraping&lt;/strong&gt;: Respect robots.txt and rate limits&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Error Handling&lt;/strong&gt;: Never expose sensitive information in logs&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Configuration&lt;/strong&gt;: Validate all input parameters&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="performance-optimization"&gt;Performance Optimization&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Database Indexing&lt;/strong&gt;: Optimized queries for fast deduplication&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Batch Operations&lt;/strong&gt;: Process multiple jobs efficiently&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Connection Pooling&lt;/strong&gt;: Reuse database connections&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Caching&lt;/strong&gt;: Cache configuration and frequently accessed data&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Memory Management&lt;/strong&gt;: Clean up resources properly&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="error-handling"&gt;Error Handling&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Custom Exceptions&lt;/strong&gt;: Use domain-specific exceptions&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Graceful Degradation&lt;/strong&gt;: Continue processing when possible&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Comprehensive Logging&lt;/strong&gt;: Log all errors with context&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Recovery Strategies&lt;/strong&gt;: Retry failed operations with backoff&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;User Feedback&lt;/strong&gt;: Provide clear error messages&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="testing-strategy"&gt;Testing Strategy&lt;/h2&gt;&lt;h3 id="test-coverage-requirements"&gt;Test Coverage Requirements&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Unit Tests&lt;/strong&gt;: &amp;gt;90% coverage for all new code&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Integration Tests&lt;/strong&gt;: Test component interactions&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;End-to-End Tests&lt;/strong&gt;: Test complete pipeline functionality&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Database Tests&lt;/strong&gt;: Test all CRUD operations and migrations&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="test-data-management"&gt;Test Data Management&lt;/h3&gt;&lt;p&gt;i&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Fixtures&lt;/strong&gt;: Reusable test data in tests/fixtures/&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Mocking&lt;/strong&gt;: Mock external services (Claude API, web requests)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Database&lt;/strong&gt;: Use separate test database for isolation&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cleanup&lt;/strong&gt;: Ensure tests clean up after themselves&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="continuous-integration"&gt;Continuous Integration&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Pre-commit Hooks&lt;/strong&gt;: Run linting and formatting before commits&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Test Automation&lt;/strong&gt;: Run tests on every commit&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Code Quality&lt;/strong&gt;: Maintain high standards with automated checks&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Documentation&lt;/strong&gt;: Keep documentation in sync with code&lt;/li&gt;
-&lt;/ul&gt;
+ORDER BY start_time DESC LIMIT 5;
+
+## Development Notes
+
+### Pipeline Execution Phases
+1. **Initialization**: Setup logging, database connection, run tracking
+2. **Scraping** (optional): Collect new job postings with anti-detection
+3. **Storage**: Batch insertion with deduplication and validation
+4. **Analysis**: Relevance scoring and AI-powered classification
+5. **Documents**: LaTeX template processing and PDF generation
+6. **Email**: Automated reporting with attachments (planned)
+7. **Cleanup**: Remove old records and optimize storage
+
+### Development-Friendly Features
+- **Skip Scraping Mode**: --skip-scraping automatically resets processing status
+- **Modular Execution**: Each phase can be skipped for targeted testing
+- **Comprehensive Logging**: Detailed execution logs with structured output
+- **Test Modes**: Limited scraping for development and testing
+- **Error Recovery**: Graceful handling of failures with detailed error reporting
+
+### Configuration Management
+- **Environment Variables**: Sensitive data in secrets.env (gitignored)
+- **YAML Configuration**: User profile, skills, and analysis settings
+- **Dynamic Loading**: Configuration loaded on demand with caching
+- **Fallback Support**: Environment variables override YAML settings
+
+### AI Integration
+- **Claude API**: Job classification and keyword extraction
+- **Confidence Scoring**: AI provides confidence levels for decisions
+- **Reasoning Explanations**: Detailed explanations for classification decisions
+- **Template Selection**: AI-driven template selection based on job type
+
+### Anti-Detection Measures
+- **Random Delays**: 3-8 second delays between requests
+- **User Agent Rotation**: Rotating browser identities
+- **Exponential Backoff**: Intelligent retry strategies
+- **Session Management**: Proper HTTP session handling
+
+## Important Implementation Notes
+
+### Adding New Job Sites
+1. Add configuration to config/sites/sites_config.py
+2. Create scraper class in src/scrapers/sites/new_site_scraper.py
+3. Register in ScraperManager.create_scraper() method
+4. Add comprehensive tests in tests/unit/scrapers/
+
+### Extending Analysis Engine
+1. Modify scoring weights in config/analysis/scoring_weights.yaml
+2. Update user skills in config/analysis/skill_mappings.yaml
+3. Customize job filters in config/analysis/job_filters.yaml
+4. Customize analysis logic in src/analysis/relevance_analyzer.py
+5. Add new classification types in src/analysis/job_classifier.py
+
+### Database Schema Evolution
+1. Modify models in src/database/models/
+2. Generate migration: cd data &amp;amp;&amp;amp; alembic revision --autogenerate -m "description"
+3. Review and edit generated migration file
+4. Apply migration: cd data &amp;amp;&amp;amp; alembic upgrade head
+5. Update related service methods in src/database/service.py
+
+### Document Generation Pipeline
+1. **Classification**: AI determines job type (IC vs Leadership)
+2. **Template Selection**: Choose appropriate LaTeX template
+3. **Content Customization**: Modify template with job-specific keywords
+4. **Compilation**: Use xelatex to generate PDF
+5. **File Management**: Save to data/exports/ with descriptive names
+
+## Security and Best Practices
+
+### Security Standards
+- **API Keys**: Store in environment variables, never commit to git
+- **Database**: Use parameterized queries to prevent injection
+- **Web Scraping**: Respect robots.txt and rate limits
+- **Error Handling**: Never expose sensitive information in logs
+- **Configuration**: Validate all input parameters
+
+### Performance Optimization
+- **Database Indexing**: Optimized queries for fast deduplication
+- **Batch Operations**: Process multiple jobs efficiently
+- **Connection Pooling**: Reuse database connections
+- **Caching**: Cache configuration and frequently accessed data
+- **Memory Management**: Clean up resources properly
+
+### Error Handling
+- **Custom Exceptions**: Use domain-specific exceptions
+- **Graceful Degradation**: Continue processing when possible
+- **Comprehensive Logging**: Log all errors with context
+- **Recovery Strategies**: Retry failed operations with backoff
+- **User Feedback**: Provide clear error messages
+
+## Testing Strategy
+
+### Test Coverage Requirements
+- **Unit Tests**: &amp;gt;90% coverage for all new code
+- **Integration Tests**: Test component interactions
+- **End-to-End Tests**: Test complete pipeline functionality
+- **Database Tests**: Test all CRUD operations and migrations
+
+### Test Data Management
+- **Fixtures**: Reusable test data in tests/fixtures/
+- **Mocking**: Mock external services (Claude API, web requests)
+- **Database**: Use separate test database for isolation
+- **Cleanup**: Ensure tests clean up after themselves
+
+### Continuous Integration
+- **Pre-commit Hooks**: Run linting and formatting before commits
+- **Test Automation**: Run tests on every commit
+- **Code Quality**: Maintain high standards with automated checks
+- **Documentation**: Keep documentation in sync with code
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;## Maintenance Reminders
+
+- **Update Dependencies**: Regularly update requirements.txt and uv.lock
+- **Monitor Logs**: Check application logs for errors and performance issues
+- **Database Maintenance**: Regular cleanup of old records and optimization
+- **Configuration Review**: Periodically review and update configuration files
+- **Security Updates**: Keep API keys rotated and monitor for security issues
+- **Performance Monitoring**: Track pipeline execution times and resource usage
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;**Development Philosophy**: We optimize for maintainability over cleverness. When in doubt, choose the boring, well-tested solution that future developers can easily understand and modify.
+```
+&lt;/code&gt;&lt;/pre&gt;
 </content></entry><entry><title>Data Compass AI is now fully in production! 🎉</title><link href="https://ronikobrosly.github.io/blog/2025/2/26/data_compass_release/" rel="alternate"/><updated>2025-02-26T00:00:00Z</updated><author><name>Roni Kobrosly</name></author><id>urn:uuid:240b3bce-b8af-39e2-8add-2748e6d17eb6</id><content type="html">&lt;p&gt;After weeks of work in the little cracks of free time I have these todays, I'm launching a new web service to help our wonderful data science / analytics / AI data community.&lt;/p&gt;
 &lt;p&gt;The service is &lt;a href="https://datacompass.ai"&gt;https://datacompass.ai&lt;/a&gt; 🧭&lt;/p&gt;
 &lt;p&gt;As I've mentioned in a prior post, despite the sexiness of the field, many data scientists/analysts/AI engineers seem to be leaving the field in droves. 
