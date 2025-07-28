@@ -223,7 +223,8 @@
 <li>Instructions to continually update the README.md and CLAUDE.md files as code is modified.</li>
 <li>Instructions on the preferred way to install new third-party libraries (via <code>uv</code>) and a reminder to continually update dependency text files. </li>
 </ul>
-<p>```</p>
+<p>code: |
+```</p>
 <h1 id="claude-md-development-guidance">CLAUDE.md - Development Guidance</h1><h2 id="project-overview">Project Overview</h2><p>This project is an automated job checking and application pipeline that scrapes job websites, identifies relevant roles, and generates tailored resumes and cover letters. The system uses AI-powered job classification, intelligent document generation, and comprehensive data management.</p>
 <h2 id="the-golden-rule">The Golden Rule</h2><p>When unsure about implementation details, ALWAYS ask the developer.</p>
 <h2 id="critical-architecture-decisions">Critical Architecture Decisions</h2><h3 id="core-pipeline-flow">Core Pipeline Flow</h3><ol>
@@ -490,7 +491,8 @@ ORDER BY start_time DESC LIMIT 5;</p>
 <li><strong>End-to-End Tests</strong>: Test complete pipeline functionality</li>
 <li><strong>Database Tests</strong>: Test all CRUD operations and migrations</li>
 </ul>
-<h3 id="test-data-management">Test Data Management</h3><ul>
+<h3 id="test-data-management">Test Data Management</h3><p>i</p>
+<ul>
 <li><strong>Fixtures</strong>: Reusable test data in tests/fixtures/</li>
 <li><strong>Mocking</strong>: Mock external services (Claude API, web requests)</li>
 <li><strong>Database</strong>: Use separate test database for isolation</li>

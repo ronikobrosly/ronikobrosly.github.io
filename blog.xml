@@ -17,7 +17,8 @@
 &lt;li&gt;Instructions to continually update the README.md and CLAUDE.md files as code is modified.&lt;/li&gt;
 &lt;li&gt;Instructions on the preferred way to install new third-party libraries (via &lt;code&gt;uv&lt;/code&gt;) and a reminder to continually update dependency text files. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;code: |
+```&lt;/p&gt;
 &lt;h1 id="claude-md-development-guidance"&gt;CLAUDE.md - Development Guidance&lt;/h1&gt;&lt;h2 id="project-overview"&gt;Project Overview&lt;/h2&gt;&lt;p&gt;This project is an automated job checking and application pipeline that scrapes job websites, identifies relevant roles, and generates tailored resumes and cover letters. The system uses AI-powered job classification, intelligent document generation, and comprehensive data management.&lt;/p&gt;
 &lt;h2 id="the-golden-rule"&gt;The Golden Rule&lt;/h2&gt;&lt;p&gt;When unsure about implementation details, ALWAYS ask the developer.&lt;/p&gt;
 &lt;h2 id="critical-architecture-decisions"&gt;Critical Architecture Decisions&lt;/h2&gt;&lt;h3 id="core-pipeline-flow"&gt;Core Pipeline Flow&lt;/h3&gt;&lt;ol&gt;
@@ -284,7 +285,8 @@ ORDER BY start_time DESC LIMIT 5;&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;End-to-End Tests&lt;/strong&gt;: Test complete pipeline functionality&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Database Tests&lt;/strong&gt;: Test all CRUD operations and migrations&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="test-data-management"&gt;Test Data Management&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="test-data-management"&gt;Test Data Management&lt;/h3&gt;&lt;p&gt;i&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Fixtures&lt;/strong&gt;: Reusable test data in tests/fixtures/&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Mocking&lt;/strong&gt;: Mock external services (Claude API, web requests)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Database&lt;/strong&gt;: Use separate test database for isolation&lt;/li&gt;
