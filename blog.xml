@@ -371,9 +371,8 @@ ORDER BY start_time DESC LIMIT 5;
 - **Test Automation**: Run tests on every commit
 - **Code Quality**: Maintain high standards with automated checks
 - **Documentation**: Keep documentation in sync with code
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;## Maintenance Reminders
+
+## Maintenance Reminders
 
 - **Update Dependencies**: Regularly update requirements.txt and uv.lock
 - **Monitor Logs**: Check application logs for errors and performance issues
@@ -381,9 +380,8 @@ ORDER BY start_time DESC LIMIT 5;
 - **Configuration Review**: Periodically review and update configuration files
 - **Security Updates**: Keep API keys rotated and monitor for security issues
 - **Performance Monitoring**: Track pipeline execution times and resource usage
-&lt;/code&gt;&lt;/pre&gt;
-&lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;**Development Philosophy**: We optimize for maintainability over cleverness. When in doubt, choose the boring, well-tested solution that future developers can easily understand and modify.
+
+**Development Philosophy**: We optimize for maintainability over cleverness. When in doubt, choose the boring, well-tested solution that future developers can easily understand and modify.
 ```
 &lt;/code&gt;&lt;/pre&gt;
 </content></entry><entry><title>Data Compass AI is now fully in production! 🎉</title><link href="https://ronikobrosly.github.io/blog/2025/2/26/data_compass_release/" rel="alternate"/><updated>2025-02-26T00:00:00Z</updated><author><name>Roni Kobrosly</name></author><id>urn:uuid:240b3bce-b8af-39e2-8add-2748e6d17eb6</id><content type="html">&lt;p&gt;After weeks of work in the little cracks of free time I have these todays, I'm launching a new web service to help our wonderful data science / analytics / AI data community.&lt;/p&gt;
