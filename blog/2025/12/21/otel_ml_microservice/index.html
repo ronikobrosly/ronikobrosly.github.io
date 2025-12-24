@@ -1,0 +1,468 @@
+<!doctype html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TT9MYHW754"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TT9MYHW754');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="../../../../../static/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
+
+
+    
+
+<meta property="og:title" content="OpenTelemetry for your AI/ML microservices (Part 1)">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/otel_ml_microservice' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
+    <!-- Mathjax -->
+    <!-- <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script> -->
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+
+</head>
+
+<title>OpenTelemetry for your AI/ML microservices (Part 1) - Roni Kobrosly's Personal Site</title>
+
+<body>
+    <div class="container">
+        <h1 class="logo">
+            <a style="color:black" href="/">
+                Roni Kobrosly Ph.D.'s Website
+            </a>
+        </h1>
+        <!-- Top Navigation (local links) -->
+
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/" rel="">Home</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a class="terminal-prompt" href="/blog" rel="">Blog</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/open-source" rel="">Open Source</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/talks" rel="">Talks</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/art" rel="">Art</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/bio" rel="">Bio</a>
+                        
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Body -->
+        <div id="body">
+            
+
+
+<div class="terminal-card">
+  <header id="post_title" name="post_title">
+<!-- Set title style -->
+<span name="title" id="title">OpenTelemetry for your AI/ML microservices (Part 1)</span>
+</header>
+  <div class="card-body">
+    
+<!-- Append author -->
+<small>
+  <p>
+    written by
+    
+    Roni Kobrosly
+    
+    on
+    <span id="pub_date" name="pub_date">2025-12-21</span>
+
+    
+    | tags:
+    <!-- Append tags after author -->
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/observability/">
+        observability
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/engineering/">
+        engineering
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/open source/">
+        open source
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/machine learning/">
+        machine learning
+      </a>
+    </span>
+    
+  </p>
+  
+</small>
+
+    <hr>
+    
+    
+    <img src="logo.webp" style="padding: 10px;" >
+    
+
+    <span id="post_body" name="post_body">
+      <hr>
+<h1 id="observability-is-your-friend">Observability is your friend</h1><hr>
+<p>This is the first installment of a three-part post on observability, OpenTelemetry (Otel), and ML microservices. Stay tuned for parts two and three...</p>
+<p>Over the last few years I've been working within a large SRE org and I've come to deeply appreciate observability in the software engineering world. After talking with a number of engineers and leaders in the tech industry, my sense is that there is no final observability end state, it's a perpetual journey of improvement. Also, even in the most tech-forward organizations, with hundreds or thousands of people, there is a pervasive sense of "we're not doing this very well."</p>
+<p>I'm a data science / machine learning / AI engineer, and sadly AI/ML observability feels like a very niche topic. Let's say you've got your incredible AI/ML microservice deployed to production. Look at you, guy! Congratulations! You got your kudos from the leadership team. With a few minutes of Cloudwatch querying, you can tell it's getting several requests per second, so it is being used. You've almost made it through the <a href="https://ronikobrosly.github.io/blog/2023/10/6/ml_failure_funnel/">AI/ML failure funnel</a>. Now that you're here, how do you ensure it's running well? How do you identify subtle issues without scouring through a sea of log text? How do you easily diagnose issues in your model or the logic surrounding your model?</p>
+<p><strong>Observability</strong> is the ability to painlessly understand the internal state of a software system. This means you're able to quickly detect and pinpoint the cause of problems. But it's also more than just hunting for errors. It also allows you proactively fix subtle inefficiencies and even helps you optimize your software (identifying bottlenecks, etc.).</p>
+<p>Observability is typically built on three pillars:</p>
+<ul>
+<li><p><strong>Metrics</strong>: Numerical measurements aggregated over time. Request rates, error rates, latency percentiles, CPU usage, or business KPIs.</p>
+</li>
+<li><p><strong>Logs</strong>: Discrete records of events that happened, providing detailed context about specific operations or errors.</p>
+</li>
+<li><p><strong>Traces</strong>: Records of requests as they flow through distributed systems, showing the path and timing across multiple services. E.g. Request 301830 went from service A -&gt; service D -&gt; service F -&gt; service K, and here are the duration, status codes, and such for each hop (also called a "span") in that journey.</p>
+</li>
+</ul>
+<p>At the more mature tech shops, there are Service Level Objectives (SLOs) and Service Level Indicators (SLIs) in place. SLIs are metrics like latency or errors per thousand requests, while SLOs are quantitative targets you aim to hit (e.g. "&lt; 0.5% error rate for our authentication service").</p>
+<hr>
+<h1 id="enter-opentelemetry">Enter OpenTelemetry</h1><hr>
+<p>In <a href="https://loggingsucks.com/">Boris Tane's "LoggingSucks"</a>, one my favorite posts from 2025, he makes a convincing case that standard logging practices make for a miserable observability experience: plain text logs are hard to parse, there is too little context around any single log line, they don't lead to a holistic understanding of how the application is working, and if it's a large application made by a team then there can be a lack of standardization to deal with, and then you're at the mercy of what everyone else wants to log. All of these points are about "big" errors and don't even touch on the more subtle bugs that can drive us crazy. Good luck with those.</p>
+<p>ML operations (AKA "MLOps") has been a growing discipline for years, and from what I can tell it touches on <em>some</em> aspects of observability, but it's pretty distinct. MLOps focuses on model versioning/tracking, model CI/CD, monitoring for drift, reproducibility, and feature access. The "monitoring for drift" piece is about detecting declines in model performance and data drift, but that's different than the observability we discussed above.</p>
+<p><a href="https://opentelemetry.io/docs/what-is-opentelemetry/">OpenTelemetry (OTel)</a> is an open source, tool-agnostic framework for helping with the generation, collecting, and exporting of software metrics, logs, and traces. It's fantastic. It's certainly not an observability silver bullet (no tool will help you achieve observability if your software is poorly written or poorly instrumented) but it's pretty damn close.</p>
+<hr>
+<h1 id="a-toy-ml-microservice-to-demo-otel">A toy ML microservice to demo OTel</h1><hr>
+<p>To give you a light demo on OTel (<a href="https://github.com/ronikobrosly/open_telemetry_ml_api">see my GitHub repo</a>), I made a toy recommendation engine. It's a FastAPI microservice that takes free text and recommends a relevant document (it's basically semantic search). The data flow of the application is shown below.</p>
+<p><img src="ascii_diagram.webp" alt=""></p>
+<p>It includes a toy ML model, a SQLite database, and a real request to the <a href="https://en.wikipedia.org/api/rest_v1/">Wikipedia search API</a>. Sure, a real ML microservice might not contain all of these things, but I wanted the app to cover many OTel features.</p>
+<p>Instrumenting this application with OTel is a pretty straight forward process:</p>
+<p>1) <strong>Create your application</strong>. Duh. Ensure it is written in a clean, modular fashion so that each of the modules has distinct and important attributes that you can expose (see the warning in the final section...)</p>
+<p>2) <strong>Set up your observability data sink</strong>. This can be relational data warehouse or a data lake. In my demo I used <a href="https://en.wikipedia.org/wiki/ClickHouse">ClickHouse</a>, an open-source database management system.</p>
+<p>3) <strong>Set up your UI for exploring logs, metrics, and traces</strong>. <a href="https://signoz.io/">SigNoz</a> is an excellent open-source option. It's an observability platform that natively with OTel. It allows you to create and explore dashboards, search logs, visualize traces, set alerts for anomalies, etc. In my experience, it everybit as flexible and intuitive as commercial solutions.</p>
+<p>4) <strong>Have OTel collectors point to ClickHouse and SigNoz</strong>.</p>
+<p>Below is the code from the toy project's <code>telemetry.py</code> file, which is used through the app. Yes, there is more to the process than dropping this code into your project, <em>but not that much more</em>. As you can see, OTel natively works with common databases (SQLite in this case) and plays very nicely with FastAPI.</p>
+<div class="hll"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">trace</span><span class="p">,</span> <span class="n">metrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.sdk.trace</span><span class="w"> </span><span class="kn">import</span> <span class="n">TracerProvider</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.sdk.trace.export</span><span class="w"> </span><span class="kn">import</span> <span class="n">BatchSpanProcessor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.sdk.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeterProvider</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.sdk.metrics.export</span><span class="w"> </span><span class="kn">import</span> <span class="n">PeriodicExportingMetricReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.sdk.resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">SERVICE_NAME</span><span class="p">,</span> <span class="n">SERVICE_VERSION</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.exporter.otlp.proto.grpc.trace_exporter</span><span class="w"> </span><span class="kn">import</span> <span class="n">OTLPSpanExporter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.exporter.otlp.proto.grpc.metric_exporter</span><span class="w"> </span><span class="kn">import</span> <span class="n">OTLPMetricExporter</span>
+
+<span class="c1"># Auto-instrumentation imports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.instrumentation.fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPIInstrumentor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.instrumentation.httpx</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPXClientInstrumentor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.instrumentation.sqlite3</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLite3Instrumentor</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.core.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_telemetry</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize OpenTelemetry with SigNoz exporters&quot;&quot;&quot;</span>
+
+    <span class="c1"># Define resource attributes</span>
+    <span class="n">resource</span> <span class="o">=</span> <span class="n">Resource</span><span class="p">(</span><span class="n">attributes</span><span class="o">=</span><span class="p">{</span>
+        <span class="n">SERVICE_NAME</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">otel_service_name</span><span class="p">,</span>
+        <span class="n">SERVICE_VERSION</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">otel_service_version</span><span class="p">,</span>
+        <span class="s2">&quot;deployment.environment&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">otel_deployment_environment</span><span class="p">,</span>
+        <span class="s2">&quot;service.namespace&quot;</span><span class="p">:</span> <span class="s2">&quot;ml-demo&quot;</span><span class="p">,</span>
+    <span class="p">})</span>
+
+    <span class="c1"># Setup Tracing</span>
+    <span class="n">trace_provider</span> <span class="o">=</span> <span class="n">TracerProvider</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">)</span>
+
+    <span class="c1"># Use BatchSpanProcessor for production efficiency</span>
+    <span class="n">otlp_span_exporter</span> <span class="o">=</span> <span class="n">OTLPSpanExporter</span><span class="p">(</span>
+        <span class="n">endpoint</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">otel_exporter_otlp_endpoint</span><span class="p">,</span>
+        <span class="n">insecure</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Set to False if using TLS</span>
+    <span class="p">)</span>
+    <span class="n">trace_provider</span><span class="o">.</span><span class="n">add_span_processor</span><span class="p">(</span>
+        <span class="n">BatchSpanProcessor</span><span class="p">(</span>
+            <span class="n">otlp_span_exporter</span><span class="p">,</span>
+            <span class="n">max_queue_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+            <span class="n">max_export_batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+            <span class="n">export_timeout_millis</span><span class="o">=</span><span class="mi">30000</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">trace</span><span class="o">.</span><span class="n">set_tracer_provider</span><span class="p">(</span><span class="n">trace_provider</span><span class="p">)</span>
+
+    <span class="c1"># Setup Metrics</span>
+    <span class="n">otlp_metric_exporter</span> <span class="o">=</span> <span class="n">OTLPMetricExporter</span><span class="p">(</span>
+        <span class="n">endpoint</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">otel_exporter_otlp_endpoint</span><span class="p">,</span>
+        <span class="n">insecure</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">metric_reader</span> <span class="o">=</span> <span class="n">PeriodicExportingMetricReader</span><span class="p">(</span>
+        <span class="n">otlp_metric_exporter</span><span class="p">,</span>
+        <span class="n">export_interval_millis</span><span class="o">=</span><span class="mi">60000</span>  <span class="c1"># 1 minute</span>
+    <span class="p">)</span>
+    <span class="n">meter_provider</span> <span class="o">=</span> <span class="n">MeterProvider</span><span class="p">(</span>
+        <span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">,</span>
+        <span class="n">metric_readers</span><span class="o">=</span><span class="p">[</span><span class="n">metric_reader</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">metrics</span><span class="o">.</span><span class="n">set_meter_provider</span><span class="p">(</span><span class="n">meter_provider</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;OpenTelemetry initialized&quot;</span><span class="p">,</span>
+        <span class="n">extra</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;service_name&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">otel_service_name</span><span class="p">,</span>
+            <span class="s2">&quot;endpoint&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">otel_exporter_otlp_endpoint</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">instrument_app</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply auto-instrumentation to FastAPI app&quot;&quot;&quot;</span>
+
+    <span class="c1"># FastAPI auto-instrumentation</span>
+    <span class="c1"># Note: excluded_urls can cause issues with status code reporting</span>
+    <span class="n">FastAPIInstrumentor</span><span class="o">.</span><span class="n">instrument_app</span><span class="p">(</span>
+        <span class="n">app</span><span class="p">,</span>
+        <span class="n">tracer_provider</span><span class="o">=</span><span class="n">trace</span><span class="o">.</span><span class="n">get_tracer_provider</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1"># httpx auto-instrumentation (for Wikipedia API)</span>
+    <span class="n">HTTPXClientInstrumentor</span><span class="p">()</span><span class="o">.</span><span class="n">instrument</span><span class="p">()</span>
+
+    <span class="c1"># SQLite3 auto-instrumentation</span>
+    <span class="n">SQLite3Instrumentor</span><span class="p">()</span><span class="o">.</span><span class="n">instrument</span><span class="p">()</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Auto-instrumentation applied&quot;</span><span class="p">)</span>
+</pre></div>
+<p><strong>Make sure that you record all important attributes within all modules of your codebase</strong>. Yes, OTel out-of-the-box collects a lot of standard health information for each span, but it's important to collect your own attributes too. Later on, this will allow you to click on a single jump in a request's trace and see an enormous amount of information. This is an simple as the following:</p>
+<div class="hll"><pre><span></span><span class="o">...</span>
+<span class="n">span</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">get_current_span</span><span class="p">()</span>
+
+<span class="c1"># Add query attributes</span>
+<span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;query.original&quot;</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+<span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;query.length&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">query</span><span class="p">))</span>
+<span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;query.final_tokens&quot;</span><span class="p">,</span> <span class="n">final_tokens</span><span class="p">)</span>
+<span class="n">span</span><span class="o">.</span><span class="n">set_attribute</span><span class="p">(</span><span class="s2">&quot;query.custom_thing&quot;</span><span class="p">,</span> <span class="n">my_custom_thing</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+<p>The final architecture of it all looked like this:</p>
+<p><img src="logo.webp" alt=""></p>
+<p>Once I started up the microservice, I immediately started seeing data being piped to ClickHouse. Out of the box, with the setup shown above in the code, you get basic dashboards with views of:</p>
+<ul>
+<li>Overall request latency, response status codes, and <a href="https://en.wikipedia.org/wiki/Apdex">Apdex</a>.</li>
+<li>Database reads and writes and operation duration</li>
+<li>A bunch of health metrics around the external API call that the service makes</li>
+<li>The start time, end time, duration, health, and any custom attributes for each individual jump in every request trace.</li>
+</ul>
+<p>By default, each of these is shown in a time series, but it's fairly easy to convert these into bar charts, group them by some dimension, etc.</p>
+<p>See the screenshots below:</p>
+<p><img src="signoz_primary_dashboard.webp" alt="">
+<img src="db_calls.webp" alt="">
+<img src="external_calls.webp" alt=""></p>
+<p>Yeah, the trace UI takes a little time to get use to since you're looking at so many simultaneous data representations together, like a graph of trace span paths, the health metrics for each span, and the generous metadata for each span. By default SigNoz visualizes the spans of traces in a way that looks like a <a href="https://www.brendangregg.com/flamegraphs.html">flame graph</a>.</p>
+<p>When I first set up this demo, I made a mistake in how I was formatting my API calls to Wikipedia. This was producing a silent error. I immediately and accidentally found this error by looking at the trace data, seeing that the Wikipedia span was in poor health. Very cool...</p>
+<p><img src="trace.webp" alt=""></p>
+<p>If you're thinking that this sort of observability operation would quickly fill a massive data warehouse and would bankrupt a large company with 100s or 1000s of microservices and millions of active users ... you're helping me transition to my next point. Sampling is usually employed to reduce costs. <a href="https://en.wikipedia.org/wiki/Simple_random_sample">Simple random sampling</a> isn't going to capture many of the logs of interest (failures and errors are generally rare events). There are multiple sampling methods and within each of these methods there are settings to play with. That said, a simple "<a href="https://opentelemetry.io/blog/2022/tail-sampling/">long tail sampling</a>" within OTel collectors works nicely! Here's a super basic demo of a long tail sampler:</p>
+<div class="hll"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_logs</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate mock logs: mostly fast/successful, some errors/slow&quot;&quot;&quot;</span>
+    <span class="n">logs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">is_error</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.05</span>  <span class="c1"># 5% errors</span>
+        <span class="n">is_slow</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.02</span>   <span class="c1"># 2% slow requests</span>
+
+        <span class="n">logs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">500</span> <span class="k">if</span> <span class="n">is_error</span> <span class="k">else</span> <span class="mi">200</span><span class="p">,</span>
+            <span class="s1">&#39;duration_ms&#39;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">is_error</span> <span class="ow">or</span> <span class="n">is_slow</span><span class="p">)</span> 
+                          <span class="k">else</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="k">return</span> <span class="n">logs</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">should_sample</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">base_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decide if we should keep this log&quot;&quot;&quot;</span>
+    <span class="c1"># Always sample errors</span>
+    <span class="k">if</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">500</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span>
+
+    <span class="c1"># Always sample slow requests (&gt;1000ms)</span>
+    <span class="k">if</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;duration_ms&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;slow&#39;</span>
+
+    <span class="c1"># Sample normal traffic at low rate (1%)</span>
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">base_rate</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span>
+
+    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span>
+
+<span class="c1"># Demo</span>
+<span class="n">logs</span> <span class="o">=</span> <span class="n">generate_logs</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">sampled</span> <span class="o">=</span> <span class="p">[</span><span class="n">log</span> <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span> <span class="k">if</span> <span class="n">should_sample</span><span class="p">(</span><span class="n">log</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">errors</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span> <span class="k">if</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">slow</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span> <span class="k">if</span> <span class="n">log</span><span class="p">[</span><span class="s1">&#39;duration_ms&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span><span class="si">}</span><span class="s2"> logs&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sampled </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sampled</span><span class="p">)</span><span class="si">}</span><span class="s2"> logs (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sampled</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Captured ALL </span><span class="si">{</span><span class="n">errors</span><span class="si">}</span><span class="s2"> errors and ALL </span><span class="si">{</span><span class="n">slow</span><span class="si">}</span><span class="s2"> slow requests&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plus ~1% of normal traffic for baseline&quot;</span><span class="p">)</span>
+</pre></div>
+<hr>
+<h1 id="a-parting-warning-otel-alone-won-t-save-you">A parting warning: OTel alone won't save you</h1><hr>
+<p>Slapping OTel code into all of your applications and exporting the output to a database, alone, won't get you to the observability promised land. Remember, if your software is poorly written and your systems of applications aren't structured well, OTel won't do you much good. How useful is a detailed trace if your software isn't structured so that there are clearly defined modules to track? You also need to proactively think about failure modes too. For ML recommender portion of this project, I needed to take stock of what attributes would be most helpful should I need to find very subtle issues during model inference.</p>
+<p>Stay tuned for parts two and three!</p>
+
+    </span>
+
+    
+    
+    
+    
+    
+
+  </div>
+
+</div>
+
+
+
+
+        </div>
+
+        <!-- Bottom Navigation (external links) -->
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://drive.google.com/file/d/1kk1d_7rJ0ILEU59e8hDQ7WQbN6TtyNKe/view?usp=sharing" rel="">
+                            Resume</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/ronikobrosly" rel="">
+                            LinkedIn</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://github.com/ronikobrosly" rel="">
+                            GitHub</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://stackoverflow.com/users/2831487/slyron" rel="">
+                            Stack Overflow</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://bsky.app/profile/slykoby.bsky.social" rel="">
+                            Bluesky</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C21&amp;q=rw+kobrosly&amp;btnG=" rel="">
+                            Publications</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=roni.kobrosly@gmail.com&amp;su=Hi! Reaching out from your personal website...&amp;body=blah blah blah" rel="">
+                            Contact Me</a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</body>
