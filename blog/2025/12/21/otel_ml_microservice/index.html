@@ -338,7 +338,7 @@
 </pre></div>
 <p>The final architecture of it all looked like this:</p>
 <p><img src="logo.webp" alt=""></p>
-<p>Once I started up the microservice, I immediately started seeing data being piped to ClickHouse. Out of the box, with the setup shown above in the code, you get basic dashboards with views of:</p>
+<p>Once I started up the microservice, I immediately started seeing data being piped to ClickHouse. Out-of-the-box, with the setup shown above in the code, you get basic dashboards with views of:</p>
 <ul>
 <li>Overall request latency, response status codes, and <a href="https://en.wikipedia.org/wiki/Apdex">Apdex</a>.</li>
 <li>Database reads and writes and operation duration</li>
@@ -398,6 +398,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Captured ALL </span><span class="si">{</span><span class="n">errors</span><span class="si">}</span><span class="s2"> errors and ALL </span><span class="si">{</span><span class="n">slow</span><span class="si">}</span><span class="s2"> slow requests&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plus ~1% of normal traffic for baseline&quot;</span><span class="p">)</span>
 </pre></div>
+<p>When you want to ensure the reliability of the ML model itself, I think you've made it to the sometimes blurry boundary line between observability and MLOps. I would argue that observability is about making the internals of software systems easily, well, observable, to ensure your system reliably works. Detecting meaningful data and conceptual drift requires statistical thinking about distributions and populations over time, and so it isn't as low-level as observability (and its focus on requests, uptime, traces, etc.). So while I don't think the methods of observability are completely applicable to monitoring model performance, you could probably track immediate metrics around like clicks after prediction, dismissals, thumbs up or down, or dwell time.</p>
 <hr>
 <h1 id="a-parting-warning-otel-alone-won-t-save-you">A parting warning: OTel alone won't save you</h1><hr>
 <p>Slapping OTel code into all of your applications and exporting the output to a database, alone, won't get you to the observability promised land. Remember, if your software is poorly written and your systems of applications aren't structured well, OTel won't do you much good. How useful is a detailed trace if your software isn't structured so that there are clearly defined modules to track? You also need to proactively think about failure modes too. For ML recommender portion of this project, I needed to take stock of what attributes would be most helpful should I need to find very subtle issues during model inference.</p>
