@@ -14,23 +14,29 @@
     <meta charset="utf-8">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../../../static/favicon.png">
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
 
     <!-- Open Graph Image -->
-    <meta property="og:image" content="../../../static/og-image.png">
+    <meta property="og:image" content="../../../../../static/og-image.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     
-    
-
-    
-    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
 
 
-    <link rel="stylesheet" href="../../../static/css/terminal.css" />
-    <link rel="stylesheet" href="../../../static/css/custom.css" />
+    
+
+<meta property="og:title" content="RetroFlow package">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/retroflow_package' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
     <!-- Mathjax -->
     <!-- <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
@@ -56,7 +62,7 @@
 
 </head>
 
-<title>Tag: engineering - Roni Kobrosly's Personal Site</title>
+<title>RetroFlow package - Roni Kobrosly's Personal Site</title>
 
 <body>
     <div class="container">
@@ -144,30 +150,93 @@
         <!-- Body -->
         <div id="body">
             
-<h1><i class="fas fa-tag"></i> engineering</h1>
+
+
+<div class="terminal-card">
+  <header id="post_title" name="post_title">
+<!-- Set title style -->
+<span name="title" id="title">RetroFlow package</span>
+</header>
+  <div class="card-body">
+    
+<!-- Append author -->
+<small>
+  <p>
+    written by
+    
+    Roni Kobrosly
+    
+    on
+    <span id="pub_date" name="pub_date">2026-01-09</span>
+
+    
+    | tags:
+    <!-- Append tags after author -->
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/engineering/">
+        engineering
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/open source/">
+        open source
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/agentic ai/">
+        agentic ai
+      </a>
+    </span>
+    
+  </p>
+  
+</small>
+
+    <hr>
+    
+    
+    <img src="logo.webp" style="padding: 10px;" >
+    
+
+    <span id="post_body" name="post_body">
+      <p>Okay, I decided to take that free-floating ASCII diagram code and make it into a proper open-source python package. I present to you “RetroFlow”. On the surface it seems silly, but there are a lot of advantages to using ASCII flowcharts, particularly in this age of agentic AI.</p>
+<p>The package on <a href="https://github.com/ronikobrosly/RetroFlow">GitHub</a> and <a href="https://pypi.org/project/retroflow/">PyPi</a>.</p>
+<p>Beyond looking like something out of a technical document from the early days of computing:</p>
 <ul>
-  
-    <li><a href="../../2026/1/9/retroflow_package/">2026-01-09: RetroFlow package</a></li>
-  
-    <li><a href="../../2026/1/5/ascii_diagrams/">2026-01-05: Cool retro computing diagrams!</a></li>
-  
-    <li><a href="../../2026/1/4/data_compass_final_data/">2026-01-04: Data Compass AI: What 3,000+ Survey Responses Tell Us About Data Maturity</a></li>
-  
-    <li><a href="../../2025/12/21/otel_ml_microservice/">2025-12-21: OpenTelemetry for your AI/ML microservices (Part 1)</a></li>
-  
-    <li><a href="../../2025/6/16/claude_code_md_file/">2025-06-16: How I structure my Claude Code markdown memory files</a></li>
-  
-    <li><a href="../../2025/2/26/data_compass_release/">2025-02-26: Data Compass AI is now fully in production! 🎉</a></li>
-  
-    <li><a href="../../2025/2/21/data_compass_is_coming/">2025-02-21: Data Compass AI is almost here!</a></li>
-  
-    <li><a href="../../2025/1/2/lessons_from_cursor/">2025-01-02: Some initial lessons from using Cursor to build a production web app</a></li>
-  
-    <li><a href="../../2024/12/19/data_maturity_nov_2024/">2024-12-19: More thoughts on &#34;data maturity&#34; at organizations</a></li>
-  
-    <li><a href="../../2022/12/16/ai_end_of_software_engineering/">2022-12-16: Generative AI and the end of software engineering?</a></li>
-  
+<li>They work wonderfully in the age of agentic AI, which can easily read, parse, and understand these small process representations. </li>
+<li>ASCII diagrams can live inline with: PRs, Markdown files, Slack threads, etc.</li>
+<li>ASCII diagrams optimize for thinking speed, not presentation quality. It encourages iteration and deletion instead of premature refinement.</li>
+<li>Minimalist diagrams reduce visual noise (although they do still look retro and pretty)</li>
+<li>They're tool agnostic and can be rendered anywhere</li>
 </ul>
+<p>The package takes a simple string like this...</p>
+<div class="hll"><pre><span></span><span class="n">REQUEST</span> <span class="o">-&gt;</span> <span class="n">VALIDATE</span>
+<span class="n">VALIDATE</span> <span class="o">-&gt;</span> <span class="n">PROCESS</span>
+<span class="n">PROCESS</span> <span class="o">-&gt;</span> <span class="n">RESPONSE</span>
+<span class="n">VALIDATE</span> <span class="o">-&gt;</span> <span class="n">ERROR</span> <span class="n">HANDLER</span>
+<span class="n">PROCESS</span> <span class="o">-&gt;</span> <span class="n">ERROR</span> <span class="n">HANDLER</span>
+<span class="n">ERROR</span> <span class="n">HANDLER</span> <span class="o">-&gt;</span> <span class="n">LOG</span>
+<span class="n">ERROR</span> <span class="n">HANDLER</span> <span class="o">-&gt;</span> <span class="n">RETRY</span>
+<span class="n">RETRY</span> <span class="o">-&gt;</span> <span class="n">VALIDATE</span>
+</pre></div>
+<p>and converts it into a text file or a high-resolution image like this...</p>
+<p><img src="example_error_handling.webp" alt=""></p>
+<p>It abstracts away the complex decisions around layout, while giving you some choices around vertical versus horizontal layout, title banners, and a bit more. It can also handle cycles and bidirectional elements in your flowchart! Let me know what you think!</p>
+
+    </span>
+
+    
+    
+    
+    
+    
+
+  </div>
+
+</div>
+
+
+
 
         </div>
 
