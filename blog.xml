@@ -22,6 +22,18 @@
 &lt;p&gt;and converts it into a text file or a high-resolution image like this...&lt;/p&gt;
 &lt;p&gt;&lt;img src="example_error_handling.webp" alt=""&gt;&lt;/p&gt;
 &lt;p&gt;It abstracts away the complex decisions around layout, while giving you some choices around vertical versus horizontal layout, title banners, and a bit more. It can also handle cycles and bidirectional elements in your flowchart! Let me know what you think!&lt;/p&gt;
+&lt;p&gt;Here are some more examples of what you can do with RetroFlow:&lt;/p&gt;
+&lt;p&gt;&lt;img src="example_flow_1.webp" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="flowchart.webp" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="example_flow_2.webp" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="example_flow_3.webp" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="example_flow_4.webp" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="example_flow_5.webp" alt=""&gt;&lt;/p&gt;
 </content></entry><entry><title>Cool retro computing diagrams!</title><link href="https://ronikobrosly.github.io/blog/2026/1/5/ascii_diagrams/" rel="alternate"/><updated>2026-01-05T00:00:00Z</updated><author><name>Roni Kobrosly</name></author><id>urn:uuid:81dfab9c-7acf-325a-8613-234f95d5a091</id><content type="html">&lt;p&gt;I forget how it started but recently I've been enjoying making these cool retro-ish, ASCII flow diagrams for my personal projects. They look like something you'd find in a dusty cabinet of early NASA documents. Obviously, I can't use them at the large enterprise organization I work at these days, but maybe some day I'll be able to bust these out processionally...&lt;/p&gt;
 &lt;p&gt;Give it a shot, &lt;a href="https://github.com/ronikobrosly/ascii-diagram"&gt;here's the GitHub repo&lt;/a&gt;!&lt;/p&gt;
 &lt;p&gt;Finding the right pathing for the arrows, given a set of constraints (avoid overlapping and criss-crossing arrows), is trickier than you might think.&lt;/p&gt;
