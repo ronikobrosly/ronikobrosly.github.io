@@ -1,0 +1,484 @@
+<!doctype html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TT9MYHW754"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TT9MYHW754');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="../../../../../static/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
+
+
+    
+
+<meta property="og:title" content="Automated Root Cause Analysis During Incidents (Part 2)">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/microservice_rca' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
+    <!-- Mathjax -->
+    <!-- <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script> -->
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+
+</head>
+
+<title>Automated Root Cause Analysis During Incidents (Part 2) - Roni Kobrosly's Personal Site</title>
+
+<body>
+    <div class="container">
+        <h1 class="logo">
+            <a style="color:black" href="/">
+                Roni Kobrosly Ph.D.'s Website
+            </a>
+        </h1>
+        <!-- Top Navigation (local links) -->
+
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/" rel="">Home</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a class="terminal-prompt" href="/blog" rel="">Blog</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/open-source" rel="">Open Source</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/talks" rel="">Talks</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/art" rel="">Art</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/bio" rel="">Bio</a>
+                        
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Body -->
+        <div id="body">
+            
+
+
+<div class="terminal-card">
+  <header id="post_title" name="post_title">
+<!-- Set title style -->
+<span name="title" id="title">Automated Root Cause Analysis During Incidents (Part 2)</span>
+</header>
+  <div class="card-body">
+    
+<!-- Append author -->
+<small>
+  <p>
+    written by
+    
+    Roni Kobrosly
+    
+    on
+    <span id="pub_date" name="pub_date">2026-02-02</span>
+
+    
+    | tags:
+    <!-- Append tags after author -->
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/observability/">
+        observability
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/engineering/">
+        engineering
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/open source/">
+        open source
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/machine learning/">
+        machine learning
+      </a>
+    </span>
+    
+  </p>
+  
+</small>
+
+    <hr>
+    
+    
+    <img src="logo.webp" style="padding: 10px;" >
+    
+
+    <span id="post_body" name="post_body">
+      <p>This is part 2 of a series of posts on observability for AI/ML services and their supporting services. <a href="https://ronikobrosly.github.io/blog/2025/12/21/otel_ml_microservice/">Part 1 (applying OpenTelemetry to classic ML services) can be read here</a>.</p>
+<p>Let's say you've fully instrumented your organization's applications with OpenTelemetry (OTel). You're capturing tons of useful metrics, trace data, and service attributes. You're even applying a sampling strategy so that your manager's manager won't chew you out for blowing through the department budget. At the holiday party, you share in a hearty laugh as your team talks about how "Mean Time To Recovery", your most critical metric, will be halved. "Did you pour me a pinot grigio? It's great, who makes this?" 🍷</p>
+<p>Hold up. Even if we put aside all of the organizational and process challenges that won't be solved by OTel (e.g. how does the paging system work? How much must be documented before paging the responsible team? Whose permission is needed to escalate this incident? etc etc.), there are still many reasons why you shouldn't prematurely celebrate. This blog post focuses on this reason: With full tracing, the volume of data can be overwhelming, making it hard to find the "signal" within the noise during a major incident. After all, this trace and metric data still needs to be examined in on dozens of dashboard plots and manual searching. That is, unless you've thought about putting your rich OTel data towards some automated root cause analysis (or fault localization) algorithm.</p>
+<h2 id="categories-of-rca-approaches">Categories of RCA approaches</h2><p>There are a few categories of algorithms for automating root cause analysis, and they can be applied to a number of possible observability metrics (latency, availability/uptime, error code counts, etc.)</p>
+<h3 id="1-heuristics">1) Heuristics</h3><p>This covers very general, and often intuitive rules-of-thumb. Also, none of these require anything other than straight software engineering to implement.</p>
+<ul>
+<li>The service showing the greatest anomalies in metrics is the root cause</li>
+<li>The most upstream and anomalous service is the root cause</li>
+<li>The service(s) with the most connections to broken services are likely to be the root cause </li>
+</ul>
+<h3 id="2-causal-approaches">2) Causal approaches</h3><p>These approaches typically involve some aspect of <a href="https://www.pywhy.org/dowhy/main/user_guide/causal_tasks/root_causing_and_explaining/distribution_change.html">counterfactual thinking</a>. They also generally involve a graph of known service dependencies.</p>
+<h3 id="3-large-language-models-llms-and-agentic-ai">3) Large language models (LLMs) and agentic AI</h3><p>This would involve a process flow like the following:</p>
+<ul>
+<li>Identify a set of services that are showing anomalous performance</li>
+<li>An agent fetches these services' logs via MCP server or querying</li>
+<li>The agent pulls known source code and information on recent changes via GitHub, Gitlab, etc</li>
+<li>The agent reasons which service caused a cascading failure</li>
+</ul>
+<p>To my surprise, while you'll hear and see plenty of discussion around the above approaches, I've never heard of actual production use of these approaches. There might be several reasons for this.</p>
+<ul>
+<li>Maybe they perform poorly?</li>
+<li>Or almost all organizations lack reliable, complete data on logs, metrics, and traces, and so these methods can't even get off the ground.</li>
+<li>Maybe reliability engineers are risk-averse (they need to make everything maximally reliable). So they're almost ideologically opposed to automated pinpointing of causes.</li>
+</ul>
+<p>It'd be great to dig deeper into these various fault localization approaches to understand how well they compare, what the conditions are for them to work well, etc. But here's the rub. It's unfortunate but understandable that there isn't much gold standard, publicly available log, metric, and trace data on large systems and incidents they experience (you don't hear this: "Hi, we're a large organization that serves millions of people, and here are all of the logs behind that huge outage we had last month..."). So, if you can't use real data, you simulate it of course!</p>
+<p>To find out which of these approaches actually holds water, we need a simulation — a digital petri dish where we can break things on purpose and see who identifies the culprit first. I drew inspiration from the <a href="https://proceedings.mlr.press/v236/hardt24a/hardt24a.pdf">PetShop analysis by Hardt et al.</a>, and I extended their work into a larger simulation. Think of it as a stress test for RCA algorithms, specifically designed to mimic the messy, interconnected reality of modern microservices.</p>
+<h2 id="the-anatomy-of-the-simulation">The Anatomy of the Simulation</h2><p>The simulation involves a 100+ node microservice topology. It’s structured across five hierarchical layers, mimicking a real enterprise stack:</p>
+<ul>
+<li>Layer 1: API Gateways (the front door)</li>
+<li>Layers 2-4: Web services and serverless functions (the logic)</li>
+<li>Layer 5: Backend infrastructure (databases, caches, and message queues)</li>
+</ul>
+<p><img src="microservice_topology.webp" alt=""></p>
+<h3 id="1-establishing-a-normal-baseline">1. Establishing a "Normal" Baseline</h3><p>Before we break things, we need to know what "good" looks like. The sim generated 14 days of baseline data at 5-minute resolution. To keep it realistic, there weren't just use flat lines; cycles of traffic dips and peaks were baked in (peaks occurring at 2 PM). There was a 40% reduction in load on weekends. Autocorrelated noise was added: Because real metrics are never perfectly clean.</p>
+<h3 id="2-injecting-the-chaos">2. Injecting the Chaos</h3><p>Once the baseline was set, the "fault injection" phase began. 18 nodes across layers 1 through 4 were selected (leaving the API gateway alone to ensure we could still "see" the failures) and bombarded them with several types of realistic faults.</p>
+<table>
+<thead>
+<tr>
+<th>Fault Type</th>
+<th>Real-Life Situation</th>
+<th>Simulation Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU Hog</td>
+<td>Inefficient algorithm, crypto mining malware, runaway process</td>
+<td>Quadratic latency increase with CPU load; 15% burst probability; 20% variance</td>
+</tr>
+<tr>
+<td>Memory Leak</td>
+<td>Unreleased allocations, growing caches, accumulating state</td>
+<td>Exponential memory growth until 95% crash threshold; 500× latency spike on crash; 3-timestep recovery cycle</td>
+</tr>
+<tr>
+<td>Request Overload</td>
+<td>Traffic spike, DDoS, viral content, Black Friday sales</td>
+<td>Quadratic latency scaling with load factor; ramp-up/plateau/ramp-down phases; availability = 1/load</td>
+</tr>
+<tr>
+<td>Misconfiguration</td>
+<td>Wrong connection string, bad timeout setting, resource limits</td>
+<td>Subtype-dependent: connection_string (100% fail), timeout (30% spike), resource_limit (exponential)</td>
+</tr>
+<tr>
+<td>Network Partition</td>
+<td>Data center split, cloud region failure, cable cut</td>
+<td>Bimodal: 30% chance of 3000ms timeout vs. success; 20-80% availability loss</td>
+</tr>
+<tr>
+<td>Dependency Timeout</td>
+<td>Downstream service hung, circuit breaker open</td>
+<td>5000ms timeout with up to 2 retries; exponential backoff adds 500ms/retry</td>
+</tr>
+<tr>
+<td>Cold Start</td>
+<td>Serverless container spin-up, auto-scaling new instances</td>
+<td>200-2000ms spike with decaying probability as container warms; lambda-only</td>
+</tr>
+<tr>
+<td>Cache Miss Storm</td>
+<td>Cache invalidation, TTL expiry, thundering herd</td>
+<td>95% miss rate initially; 50ms latency per miss; exponential recovery</td>
+</tr>
+<tr>
+<td>Connection Pool Exhaustion</td>
+<td>Too few connections, connection leaks, slow queries</td>
+<td>Pool at 95% saturation; 500ms wait per connection; oscillation in plateau</td>
+</tr>
+<tr>
+<td>Disk I/O Saturation</td>
+<td>Large queries, backup jobs, storage thrashing</td>
+<td>3× base latency from I/O wait; 20% burst probability with additional 3× multiplier</td>
+</tr>
+<tr>
+<td>GC Pause</td>
+<td>JVM stop-the-world, heap fragmentation, large object allocation</td>
+<td>10% probability per timestep; 300ms major / 60ms minor GC; intermittent spikes</td>
+</tr>
+<tr>
+<td>Thread Starvation</td>
+<td>Deadlock, lock contention, blocking I/O in async code</td>
+<td>30% ramp-up phase then 80% contention; max +1000ms latency; gradual onset</td>
+</tr>
+</tbody>
+</table><p>The effects of these fault on latency can be seen here:</p>
+<p><img src="fault_overview_latency.webp" alt=""></p>
+<p>And here are their effects on an availability SLI:</p>
+<p><img src="fault_overview_availability.webp" alt=""></p>
+<p>In total there were 100+ incidents. There were 12 different fault types across three severity levels: mild, moderate, and severe.</p>
+<h3 id="3-the-causal-propagation-model">3. The Causal Propagation Model</h3><p>This is where it gets interesting. In a real system, a slow database doesn't just stay in the database. It crawls up the stack. The simulation uses a decay-based propagation model where effects move upstream toward the API gateway. Latency is additive: If a downstream service slows down, that delay is happily passed up the chain. Availability is multiplicative: If a dependency fails, the caller’s success rate drops proportionally. To model the "buffer" or "retry" logic often found in well-built systems, a a decay factor of 0.7 per hop was applied.</p>
+<p>Here is the flow of the entire data-generating process:</p>
+<p><img src="rca_dataset_diagram.webp" alt=""></p>
+<h2 id="the-contenders">The Contenders</h2><p>Here are the fault localization approaches that were tried:</p>
+<h4 id="1-percentile-based-detection-it-flags-any-metric-exceeding-the-99th-percentile-of-normal-data-it-s-easy-to-imagine-that-this-is-currently-the-most-common-approach-taken-across-the-industry-a-sre-looks-at-a-dashboard-sees-a-handful-of-services-with-huge-spikes-and-investigates-the-largest-anomaly">1) Percentile-Based Detection: It flags any metric exceeding the 99th percentile of normal data. It's easy to imagine that this is currently the most common approach taken across the industry. A SRE looks at a dashboard, sees a handful of services with huge spikes, and investigates the largest anomaly.</h4><h4 id="2-upstream-weighted-variants-similar-to-the-above-but-it-gives-a-bonus-score-to-nodes-deeper-in-the-call-graph-assuming-the-root-cause-is-likely-further-down">2) Upstream-Weighted Variants: Similar to the above, but it gives a "bonus" score to nodes deeper in the call graph, assuming the root cause is likely further down.</h4><h4 id="3-forecast-based-detection-uses-an-exponentially-weighted-moving-average-ewma-to-spot-deviations-from-a-predicted-trend-this-is-nice-because-it-accounts-for-the-traffic-patterns-that-were-encoded-in-the-simulation">3) Forecast-Based Detection: Uses an Exponentially Weighted Moving Average (EWMA) to spot deviations from a predicted trend. This is nice because it accounts for the traffic patterns that were encoded in the simulation.</h4><h4 id="4-epsilon-diagnosis-a-correlation-based-method-that-looks-for-changes-in-how-metrics-relate-to-one-another-during-an-incident">4) Epsilon-Diagnosis: A correlation-based method that looks for changes in how metrics relate to one another during an incident.</h4><h4 id="5-random-walk-it-treats-the-dependency-graph-like-a-map-and-walks-through-the-anomaly-signals-to-find-where-they-originated">5) Random Walk: It treats the dependency graph like a map and "walks" through the anomaly signals to find where they originated.</h4><h4 id="6-hypothesis-testing-fits-regression-models-to-the-data-and-flags-nodes-that-show-unexpected-residuals-results-that-the-model-cant-explain">6) Hypothesis Testing: Fits regression models to the data and flags nodes that show "unexpected residuals" (results that the model can’t explain).</h4><h4 id="7-dowhy-shapley-the-big-brain-approach-it-uses-formal-causal-inference-and-shapley-value-attribution-to-mathematically-pin-the-blame-on-a-specific-upstream-cause">7) DoWhy + Shapley: The "Big Brain" approach. It uses formal causal inference and Shapley value attribution to mathematically pin the blame on a specific upstream cause.</h4><h2 id="measuring-success">Measuring Success</h2><p>To keep the algorithms honest, I measured them against ground truth labels (since I was the ones who broke the system, I knew exactly who was at fault). Two performance metrics were used:</p>
+<ul>
+<li><p>Top-1 Accuracy: Did the algorithm nail the root cause on the first try?</p>
+</li>
+<li><p>Top-3 Accuracy: Was the real culprit at least in the "top 3" list? An algorithm that performs well in top-3 accuracy is still very useful, because it narrows down the field for reliability engineers.</p>
+</li>
+</ul>
+<h2 id="the-results">The results</h2><p>Epsilon-Diagnosis emerged as the top performer with 80.19% Top-1 accuracy and 85.56% Top-3 accuracy, achieving perfect detection (100%) on 9 of 12 fault types including cpu_hog, memory_leak, misconfiguration, and thread_starvation. The Forecast-Based EWMA method came second with 65.56% Top-1 and the highest Top-3 accuracy at 86.11%.</p>
+<p>In the middle of the pack were the Percentile-Based, Upstream Anomaly, and DoWhy Causal Inference methods clustered around 70-80% Top-3 accuracy.</p>
+<p>The Hypothesis Testing and Random Walk approaches performed very poorly with Top-3 accuracy around 50% or less.</p>
+<p>The results reveal that fault type has a stronger influence on detectability than severity. Certain faults like cache_miss_storm, request_overload, connection_pool_exhaustion, and disk_io_saturation were trivially detected by most algorithms (100% accuracy), while cold_start (15% Top-1), network_partition (0-100% depending on algorithm), and gc_pause (4-38% Top-1) proved consistently challenging. Notably, the correlation-based Epsilon-Diagnosis approach
+significantly outperformed both graph-based methods (Random Walk) and causal inference methods (DoWhy), suggesting that detecting statistical anomalies in metric distributions is more effective than modeling causal structure for this microservice fault localization task.</p>
+<h3 id="results-by-fault-type">Results by fault type</h3><table>
+<thead>
+<tr>
+<th>Fault Type</th>
+<th>Most Easily Caught By</th>
+<th>Why Some RCA Approaches Struggled</th>
+<th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cache_miss_storm</td>
+<td>All methods (6/7 at 100%)</td>
+<td>No struggle - creates unmistakable latency spikes at the affected node</td>
+<td>Canonical "easy" fault; any anomaly detector works</td>
+</tr>
+<tr>
+<td>connection_pool_exhaustion</td>
+<td>All methods (6/7 at 100%)</td>
+<td>No struggle - resource exhaustion creates clear, localized bottleneck</td>
+<td>Small sample size (n=4) but consistently detectable</td>
+</tr>
+<tr>
+<td>disk_io_saturation</td>
+<td>All methods (6/7 at 100%)</td>
+<td>No struggle - I/O bottlenecks produce obvious latency signatures</td>
+<td>Another resource saturation pattern with clear signals</td>
+</tr>
+<tr>
+<td>request_overload</td>
+<td>All methods (5/7 at 100%)</td>
+<td>Forecast slightly lower (76%) possibly due to sudden onset not matching EWMA predictions</td>
+<td>Load-induced latency is textbook anomaly detection</td>
+</tr>
+<tr>
+<td>misconfiguration</td>
+<td>Epsilon-Diag (100%), Forecast (90%)</td>
+<td>Random Walk failed (16%) - graph traversal doesn't help when the issue is node-local configuration</td>
+<td>Correlation-based methods excel because misconfiguration creates persistent statistical deviation</td>
+</tr>
+<tr>
+<td>memory_leak</td>
+<td>Epsilon-Diag (100%), Forecast (70%)</td>
+<td>Random Walk failed (20%) - leaks are gradual and node-local, not graph-structural</td>
+<td>Leaks create slowly-building anomalies that correlation analysis catches; graph methods miss the gradual drift</td>
+</tr>
+<tr>
+<td>cpu_hog</td>
+<td>Epsilon-Diag (100%), Forecast (88%)</td>
+<td>Random Walk failed (13%) - CPU issues don't propagate predictably through call graph</td>
+<td>Statistical methods detect the variance spike; graph traversal gets distracted by downstream effects</td>
+</tr>
+<tr>
+<td>thread_starvation</td>
+<td>Epsilon-Diag (100%), Forecast (82%)</td>
+<td>Percentile/Upstream methods struggled (4-14%) - starvation may not exceed static thresholds</td>
+<td>Dynamic baseline methods (correlation, forecast) outperform static threshold approaches</td>
+</tr>
+<tr>
+<td>network_partition</td>
+<td>Forecast & Epsilon (100%)</td>
+<td>Percentile/Upstream/DoWhy all failed (0%) - partitions affect availability, not latency thresholds</td>
+<td>Reveals a blind spot: methods focused on latency percentiles miss availability-based faults entirely</td>
+</tr>
+<tr>
+<td>dependency_timeout</td>
+<td>Random Walk (82%)</td>
+<td>Statistical methods struggled (8-30%) - the timed-out dependency may not be the most anomalous node</td>
+<td>Graph structure matters here; the root cause is upstream but downstream nodes show bigger latency spikes</td>
+</tr>
+<tr>
+<td>gc_pause</td>
+<td>Random Walk (39%) - still poor</td>
+<td>All methods struggled - GC pauses are intermittent and brief, not captured well in aggregated metrics</td>
+<td>Hardest fault type; pauses don't leave persistent signatures in time-aggregated data</td>
+</tr>
+<tr>
+<td>cold_start</td>
+<td>Random Walk (56%)</td>
+<td>Statistical methods mostly failed (0-15%) - cold starts are transient, one-time events</td>
+<td>Ephemeral faults that don't establish a pattern; graph reasoning slightly helps trace the initialization chain</td>
+</tr>
+</tbody>
+</table><h2 id="limitations">Limitations</h2><p>Whenever you see the word "simulation," your inner skeptic should be doing backflips. You'll need to take this all with a grain of salt. Real production environments aren't clean, hierarchical DAGs. They are sprawling, messy webs of "temporary" fixes, legacy monoliths that refuse to die, and that one service written in C++ that everyone is afraid to touch. In the real world, latency doesn't always decay by a neat factor of $0.7$, and "normal" behavior can change overnight because a marketing campaign went viral. Is this a useful exercise? Here are some reasons why I think there is value to this:</p>
+<p>1) The "Ground Truth" Paradox: In a real production incident, the "root cause" is often a matter of opinion or a consensus reached in a post-mortem. Was it the database lock, or was it the spike in traffic that caused the lock?In a simulation, we are the gods of chaos. We know exactly which node we broke and when. This ground truth allows us to score these algorithms with mathematical certainty. You can’t benchmark a compass if you don’t actually know where North is.</p>
+<p>2) The Safety of the Sandbox: You can't exactly inject hundreds of "severe" failures into your company's production environment just to see if your new causal inference model works. (Well, you can, but your LinkedIn status will likely change to "Open to Work" shortly after). Simulation gives us a safe space to fail fast and iterate on these algorithms without waking up the entire engineering org at 3 AM.</p>
+<p>3) Complexity vs. Complication: While a 100+ node simulation is simpler than a 10,000-node global cluster, it captures the fundamental mechanics of cascading failure. The goal isn't to perfectly replicate your specific architecture; it’s to understand how signals propagate. If an algorithm can’t find the root cause in a controlled 100-node environment, it hasn't a prayer's chance in a real-world mess of sidecars and service meshes.</p>
+<p>You can find the simulation software <a href="https://github.com/ronikobrosly/rca_simulation">here</a></p>
+
+    </span>
+
+    
+    
+    
+    
+    
+
+  </div>
+
+</div>
+
+
+
+
+        </div>
+
+        <!-- Bottom Navigation (external links) -->
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://drive.google.com/file/d/1WL28EZU8ETd3F0cUMQvwSRA5rZcU__ci/view?usp=sharing" rel="">
+                            Resume</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/ronikobrosly" rel="">
+                            LinkedIn</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://github.com/ronikobrosly" rel="">
+                            GitHub</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://stackoverflow.com/users/2831487/slyron" rel="">
+                            Stack Overflow</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://bsky.app/profile/slykoby.bsky.social" rel="">
+                            Bluesky</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C21&amp;q=rw+kobrosly&amp;btnG=" rel="">
+                            Publications</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=roni.kobrosly@gmail.com&amp;su=Hi! Reaching out from your personal website...&amp;body=blah blah blah" rel="">
+                            Contact Me</a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</body>
