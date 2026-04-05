@@ -1,0 +1,549 @@
+<!doctype html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TT9MYHW754"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TT9MYHW754');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="../../../../../static/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
+
+
+    
+
+<meta property="og:title" content="The Economics of AI Inference (as of Q2 2026)">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/ai_token_economics' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
+    <!-- Mathjax -->
+    <!-- <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script> -->
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+
+</head>
+
+<title>The Economics of AI Inference (as of Q2 2026) - Roni Kobrosly's Personal Site</title>
+
+<body>
+    <div class="container">
+        <h1 class="logo">
+            <a style="color:black" href="/">
+                Roni Kobrosly Ph.D.'s Website
+            </a>
+        </h1>
+        <!-- Top Navigation (local links) -->
+
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/" rel="">Home</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a class="terminal-prompt" href="/blog" rel="">Blog</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/open-source" rel="">Open Source</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/talks" rel="">Talks</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/art" rel="">Art</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        <!-- Set blinking cursor correctly on navigation -->
+                        
+                        
+                        
+                        
+                        
+                        <a href="/bio" rel="">Bio</a>
+                        
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Body -->
+        <div id="body">
+            
+
+
+<div class="terminal-card">
+  <header id="post_title" name="post_title">
+<!-- Set title style -->
+<span name="title" id="title">The Economics of AI Inference (as of Q2 2026)</span>
+</header>
+  <div class="card-body">
+    
+<!-- Append author -->
+<small>
+  <p>
+    written by
+    
+    Roni Kobrosly
+    
+    on
+    <span id="pub_date" name="pub_date">2026-04-05</span>
+
+    
+    | tags:
+    <!-- Append tags after author -->
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/agentic ai/">
+        agentic ai
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/generative ai/">
+        generative ai
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/statistics/">
+        statistics
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/simulation/">
+        simulation
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/economics/">
+        economics
+      </a>
+    </span>
+    
+  </p>
+  
+</small>
+
+    <hr>
+    
+    
+    <img src="logo.webp" style="padding: 10px;" >
+    
+
+    <span id="post_body" name="post_body">
+      <p>To be totally honest with you, I have no fucking clue what is going on with the cost of AI inference. I hear partially-informed murmurs almost every day. Is it getting cheaper because of improvements in this new field of "Inference Engineering" or in GPUs? Something about TPUs? Or are our complex reasoning models and larger context windows resulting in greater costs? Maybe the improvements and greater token throughput balances out in the end? 😅 What does it mean, precisely, when we say "AI costs are subsidized"? I don't think the government is subsidizing anything, I think "subsidize" here just means "we're giving it to you cheap to build our market share".</p>
+<p>Behind all of the above silliness, it's a topic of immeasurable importance for a few reasons:</p>
+<p><strong>1)</strong> <strong>I'm almost certain that AI hype/energy is the only thing keeping the Western economy out of the toilet at the moment (Q2 2026)</strong>. The supply and demand of AI token throughput is an important component of that.</p>
+<p><strong>2)</strong> If you're a developer, AI tools are rapidly becoming the air you breathe. Understanding what our AI subscription plans will look like in a few years matters for how you plan your career and your team's budget.</p>
+<p><strong>3)</strong> Every major AI provider is either pre-IPO or recently public. The moment public shareholders show up, "grow at all costs" turns into "show me the margins." <strong>That transition will be violent, and it's coming</strong>.</p>
+<p>So I did what any self-respecting nerd does when confused: I built a Monte Carlo simulation and a unit economics waterfall. I may have gone overboard, but I forgot how fun deep research can be. Here's what I found.</p>
+<p><img src="hightower.webp" alt=""></p>
+<p><br></p>
+<h2 id="part-1-ai-unit-economics-and-what-ai-inference-costs-right-now">Part 1: AI unit economics and what AI inference costs right now'</h2><p><br></p>
+<h3 id="the-token-cost-waterfall">The Token Cost Waterfall</h3><p>Let's start from the absolute bottom: the gentle purr of a GPU in a data center, crunching numbers.</p>
+<p>An <a href="https://www.nvidia.com/en-us/data-center/h100/">NVIDIA H100</a>, a workhorse of AI inference, rents for anywhere from <strong>$1.49/hour</strong> (spot pricing on Hyperbolic) to <strong>$3.90/hour</strong> (AWS on-demand). Running a 70-billion parameter model on one of these at 60% utilization gives you roughly 1,987 output tokens per second. Do the math and you get a raw cost floor of about <strong>$0.34 per million output tokens</strong>.</p>
+<p>That's the theoretical floor. <strong>Reality is significantly worse</strong>.</p>
+<p>Real provider-level costs for Sonnet/GPT-4o class models land around <strong>$1.50 per million output tokens</strong>. The gap (about 3-4x above the GPU floor) comes from non-negiotable things that sound boring but cost real money: multi-GPU serving for frontier models, KV cache memory overhead for large context windows, safety/RLHF filtering, API infrastructure, redundancy, and SLA guarantees.</p>
+<p>When you blend input tokens (which are ~3-5x cheaper to process) with output tokens using a typical 60/40 split, and layer on infrastructure overhead, the <strong>provider internal cost lands around $1.09 per million tokens</strong>.</p>
+<p><br></p>
+<h3 id="what-does-that-mean-per-query">What Does That Mean Per Query?</h3><p>Here's where it gets interesting, because not all queries are created equal:</p>
+<table>
+<thead><tr>
+<th>Query Type</th>
+<th>Tokens</th>
+<th>Provider Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autocomplete suggestion</td>
+<td>~550</td>
+<td>$0.0001</td>
+</tr>
+<tr>
+<td>Inline chat (simple)</td>
+<td>~1,800</td>
+<td>$0.001</td>
+</tr>
+<tr>
+<td>Multi-file edit</td>
+<td>~10,000</td>
+<td>$0.008</td>
+</tr>
+<tr>
+<td>Agent: bug fix</td>
+<td>~28,000</td>
+<td>$0.03</td>
+</tr>
+<tr>
+<td>Agent: feature build</td>
+<td>~90,000</td>
+<td>$0.10</td>
+</tr>
+<tr>
+<td>"Composer/refactor" session</td>
+<td>~230,000</td>
+<td>$0.34</td>
+</tr>
+</tbody>
+</table>
+<p>Read that again. An autocomplete suggestion costs a tenth of a penny. A "Composer/refactor" session costs 34 cents. <strong>That's a 3,375x spread.</strong> This is the fact that breaks flat-rate pricing models. There's a reason <a href="https://cloudedjudgement.substack.com/p/clouded-judgement-32626-per-token">Jamin Ball says pricing is one of the harder problems AI companies are tackling</a>.</p>
+<p><br></p>
+<h3 id="what-does-that-mean-per-developer-per-month">What Does That Mean Per Developer Per Month?</h3><p>When you multiply query costs by realistic daily usage patterns across 22 working days, the monthly cost-to-serve picture emerges:</p>
+<table>
+<thead><tr>
+<th>User Type</th>
+<th>Queries/Day</th>
+<th>Monthly COGS</th>
+<th>Current Price</th>
+<th>Gross Margin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Light</strong> (autocomplete-focused)</td>
+<td>~92</td>
+<td><strong>$0.87</strong></td>
+<td>$10/mo</td>
+<td>91%</td>
+</tr>
+<tr>
+<td><strong>Moderate</strong> (chat + editing)</td>
+<td>~96</td>
+<td><strong>$4.32</strong></td>
+<td>$20/mo</td>
+<td>78%</td>
+</tr>
+<tr>
+<td><strong>Heavy</strong> (agentic power user)</td>
+<td>~77</td>
+<td><strong>$21.31</strong></td>
+<td>$50/mo</td>
+<td>57%</td>
+</tr>
+</tbody>
+</table>
+<p>Light users are wildly profitable. The $10/month GitHub Copilot Pro user doing mostly autocomplete? That's a money-printing machine for Microsoft. <strong>91% gross margin.</strong></p>
+<p>Heavy agentic users, though, the ones running Claude Code or Cursor Composer to refactor entire codebases, cost <strong>$21 per month in raw compute</strong>, and that's before training <a href="https://en.wikipedia.org/wiki/Amortization_(accounting">amortization</a>) and R&amp;D. At a $50 blended price point, the margin is a tight 57%.</p>
+<p>And this is the <em>average</em> heavy user. The tail is brutal. Anthropic has disclosed that some individual Claude Code Max users on the $200/month plan generate <strong>$5,000+ in compute costs</strong>. YIKES.</p>
+<p><br></p>
+<h3 id="so-what-s-the-sustainable-price">So What's the "Sustainable" Price?</h3><p>When you add $2/month in training cost amortization and solve for pricing that delivers a 65% gross margin <em>while</em> recovering 30% of R&amp;D costs (which run about 40% of revenue for these companies), you get:</p>
+<table>
+<thead><tr>
+<th>User Type</th>
+<th>Current Price</th>
+<th>Sustainable Price (65% GM)</th>
+<th>Multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Light</td>
+<td>$10/mo</td>
+<td><strong>$12/mo</strong></td>
+<td>1.2x</td>
+</tr>
+<tr>
+<td>Moderate</td>
+<td>$20/mo</td>
+<td><strong>$27/mo</strong></td>
+<td>1.4x</td>
+</tr>
+<tr>
+<td>Heavy</td>
+<td>$50/mo</td>
+<td><strong>$101/mo</strong></td>
+<td>2.0x</td>
+</tr>
+</tbody>
+</table>
+<p>For light users, the correction is gentle a buck or two. For heavy users, prices need to roughly double <em>just to hit a reasonable margin</em>. And 65% gross margin isn't even ambitious by SaaS standards (Salesforce runs at 75%+ ).</p>
+<p><br></p>
+<h3 id="cross-validation-is-this-believable">Cross-Validation: Is This Believable?</h3><p>I sanity-checked these numbers against every public data point I could find:</p>
+<ul>
+<li><strong>Cursor</strong> reportedly runs at ~74% gross margin at \$20 per month, implying ~\$5.20 <a href="https://en.wikipedia.org/wiki/Cost_of_goods_sold">COGS</a>. My light user estimate of $2.87 COGS is in the right neighborhood (Cursor routes most queries to cheaper models).</li>
+<li><strong>GitHub Copilot</strong> was losing \$20/user/month at \$10/mo in 2023. Post-efficiency improvements, cost-to-serve is estimated at \$10-15 my moderate user at \$6.32 is conservative but plausible given their optimization.</li>
+<li><strong>Anthropic's</strong> heavy user disclosure (\$50-\$5,000/mo cost range) brackets my \$23.31 heavy user COGS.</li>
+</ul>
+<p>All three check out. ✅</p>
+<p><br><br></p>
+<h2 id="part-2-what-happens-when-the-subsidies-end">Part 2: What Happens When the Subsidies End?</h2><p>The unit economics waterfall tells you what things cost <em>now</em>. A more interesting question is: what happens over the next few years as these companies need to actually become profitable?</p>
+<p>This is where a single spreadsheet breaks down. There are too many moving pieces:</p>
+<ul>
+<li>Hardware costs are falling (how fast?)</li>
+<li>Usage per developer is growing (how much?)</li>
+<li>Models are getting more complex (at what rate?)</li>
+<li>Target margins are uncertain (50%? 65%? 80%?)</li>
+<li>Open-source alternatives cap the ceiling (at what level?)</li>
+<li>Competitive dynamics moderate pricing (by how much?)</li>
+</ul>
+<p>So I built a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo simulation</a>. 100,000 iterations. 16 input parameters, each with its own probability distribution calibrated against published research. Correlated via a <a href="https://en.wikipedia.org/wiki/Copula_(statistics">Gaussian copula</a>) so that, for example, faster hardware improvement correlates with faster usage growth (because cheaper inference encourages more usage). Three time horizons: 2, 3, and 5 years.</p>
+<p><br></p>
+<h3 id="the-central-estimate">The Central Estimate</h3><p><strong>Over a 3-year horizon, AI dev tool prices need to increase by about 2.4x to be sustainable.</strong></p>
+<p>That's the median. A \$20/month tool becomes ~\$47/month. Not the apocalypse, but not nothing either.</p>
+<p><img src="price_multiplier_distributions.webp" alt=""></p>
+<p>The distribution is right-skewed the mean is 2.7x, pulled up by a long tail of scenarios where costs explode. The 90% confidence interval spans <strong>1.0x to 5.4x</strong>, meaning there's a plausible world where prices stay flat and a plausible world where they quintuple.</p>
+<p><br></p>
+<h3 id="the-headline-probabilities">The Headline Probabilities</h3><table>
+<thead><tr>
+<th>Outcome</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prices decrease</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>Prices increase &gt;1.5x</td>
+<td>81%</td>
+</tr>
+<tr>
+<td>Prices more than double</td>
+<td><strong>62%</strong></td>
+</tr>
+<tr>
+<td>Prices more than triple</td>
+<td>32%</td>
+</tr>
+<tr>
+<td>Prices more than 5x</td>
+<td>7%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>There is a 62% probability that AI dev tool prices more than double within 3 years.</strong> Only a 5% chance they go down. Those are not comfortable numbers if you're building a budget around $20/month Cursor subscriptions for a 50-person engineering team.</p>
+<p><br></p>
+<h3 id="it-depends-enormously-on-how-you-use-ai">It Depends Enormously on How You Use AI</h3><p>This is the most important finding and the one that gets lost in the discourse. The "average" price multiplier is kind of meaningless because the user base is wildly heterogeneous.</p>
+<table>
+<thead><tr>
+<th>User Segment</th>
+<th>Median Multiplier</th>
+<th>Sustainable Price</th>
+<th>P(&gt;2x)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Light (autocomplete)</td>
+<td><strong>1.4x</strong></td>
+<td>$16/mo</td>
+<td>34%</td>
+</tr>
+<tr>
+<td>Moderate (chat + editing)</td>
+<td><strong>1.9x</strong></td>
+<td>$47/mo</td>
+<td>48%</td>
+</tr>
+<tr>
+<td>Heavy (agentic)</td>
+<td><strong>3.3x</strong></td>
+<td>$279/mo</td>
+<td>69%</td>
+</tr>
+</tbody>
+</table>
+<p>If you mostly use AI for autocomplete and simple chat, you're fine. The economics already work at current prices. Your Copilot subscription is safe.</p>
+<p>If you're an agentic power user Composer sessions, multi-file refactors, autonomous bug-fixing agents you're looking at a <strong>3.3x price multiplier</strong>. Your \$50/month blended cost becomes \$279/month. And there's a 69% chance it more than doubles.</p>
+<p>This is the bimodal reality that flat-rate pricing hides. Cursor figured this out when they switched to credit-based pricing in June 2025. Windsurf moved to daily quotas in March 2026. The industry is already unwinding flat pricing because <em>it doesn't work when usage distributions are this wide</em>.</p>
+<p><br></p>
+<h3 id="what-drives-the-uncertainty">What Drives the Uncertainty?</h3><p>The sensitivity analysis shows which parameters matter most:</p>
+<p><img src="sensitivity_tornado.webp" alt="Sensitivity tornado chart top 10 parameters"></p>
+<p>The top three:</p>
+<ol>
+<li><p><strong>Blended cost per million tokens</strong> the single biggest driver. If providers can push costs toward OpenAI's \$0.12/MTok, prices stay moderate. If costs remain at \$5-7/MTok for frontier models, prices surge.</p>
+</li>
+<li><p><strong>Hardware + algorithmic cost reduction rate</strong> how fast do GPUs and inference algorithms improve? The range here is enormous: Epoch AI estimates a median of 100x/year at fixed performance, but more conservative estimates put real-world gains at 3-12x/year.</p>
+</li>
+<li><p><strong>Annual per-user usage growth</strong> as developers shift from autocomplete to agentic workflows, token consumption per user explodes. This is the force that fights back against hardware improvements.</p>
+</li>
+</ol>
+<p>The battle between cost reduction (#2) and usage growth (#3) is <em>the</em> defining dynamic of AI economics right now. In most simulated scenarios, usage growth wins, which is why the median multiplier stays above 2x even with aggressive cost decline assumptions.</p>
+<p><br></p>
+<h3 id="the-usage-cap-alternative">The Usage Cap Alternative</h3><p>Here's the scenario that's actually <em>most likely</em> in practice: companies don't raise sticker prices. Instead, they cap usage.</p>
+<p>If prices stay flat, the simulation suggests tools would need to deliver only about <strong>60% of current usage</strong> to remain solvent. That means:</p>
+<ul>
+<li>Fewer Composer sessions before you hit a daily limit</li>
+<li>Slower agent responses during peak hours</li>
+<li>"You've used 80% of your monthly credits" notifications</li>
+</ul>
+<p>We're already seeing this play out. Cursor's credit system, Windsurf's daily quotas, Claude Code's 5-hour rolling windows these aren't feature decisions, they're economic necessities disguised as product design.</p>
+<p><br></p>
+<h3 id="the-open-source-escape-valve">The Open-Source Escape Valve</h3><p>One force moderating the upper bound: if proprietary tools get too expensive, developers can self-host open-source models.</p>
+<p>Running a quantized 70B model on a couple of cloud A100s costs roughly \$50-80/month all-in for a moderate user. A 7B-13B model on a single GPU can serve light autocomplete for \$15-30/month. These costs are falling with the same hardware improvements that benefit proprietary providers.</p>
+<p>The simulation models this as a price ceiling proprietary tools can't sustainably charge more than about <strong>2.5x the self-hosted equivalent</strong> without hemorrhaging price-sensitive users. For a moderate user, that ceiling sits around <strong>$138/month</strong>. This ceiling is why the distribution doesn't extend much past 6-8x even in pessimistic scenarios.</p>
+<p>The catch: self-hosting requires DevOps expertise, and open-source models still lag frontier models by 6-12 months in capability. So it's a leaky ceiling, not a hard wall.</p>
+<p><br></p>
+<h2 id="part-3-the-3-year-projection">Part 3: The 3-Year Projection</h2><p>The unit economics waterfall includes a forward-looking projection that makes an interesting counterpoint to the Monte Carlo results.</p>
+<p>With 55%/year hardware+algorithmic cost reduction (conservative per Epoch AI), 30%/year usage growth, and 15%/year model complexity growth, the <strong>net annual cost factor is 0.67x</strong> costs decline by about a third per year.</p>
+<p>Over 3 years, that compounds to a <strong>0.30x cost factor</strong>. Current COGS of \$23.31/month for a heavy user shrinks to \$7.10/month. At 65% gross margin, the sustainable price would be just <strong>\$31/month</strong> <em>lower</em> than today's pricing.</p>
+<p>Wait, what? The waterfall says prices could <em>decrease</em> while the simulation says they'll probably <em>double</em>?</p>
+<p>The difference is uncertainty. The waterfall uses point estimates for each parameter. The simulation uses distributions. And when you inject realistic uncertainty into growth rates, cost reduction rates, and margin targets, the right tail dominates. The <em>median</em> simulation outcome is higher than the waterfall point estimate because:</p>
+<ol>
+<li>Log-normal distributions for cost-per-token and usage growth have means above their medians, the occasional "usage explodes" or "costs don't fall as fast" scenario pulls the average up.</li>
+<li>The simulation includes subsidy reversal as a one-time upward shock.</li>
+<li>Correlated parameters mean that bad scenarios tend to cluster (high usage + high complexity + slow cost reduction).</li>
+</ol>
+<p>The waterfall and simulation agree on the direction of cost trends. They disagree on the <em>magnitude</em> because the simulation honestly accounts for the fat tails.</p>
+<p><br></p>
+<h2 id="what-does-this-mean-for-you">What Does This Mean For You?</h2><p><br></p>
+<h3 id="if-you-re-a-developer">If You're a Developer</h3><ul>
+<li><strong>A light user?</strong> You're probably fine. Current pricing is sustainable. Budget $15-20/month and move on.</li>
+<li><strong>Heavy agentic usage?</strong> Budget for \$100-300/month within 2-3 years, or plan to self-host. The \$20/month all-you-can-eat era is ending very soon.</li>
+<li><strong>Building on AI APIs directly?</strong> Watch your token consumption like a hawk. The cost-per-query spread from autocomplete (\$0.0001) to Composer (\$0.34) means small changes in usage patterns can 10x your bill.</li>
+</ul>
+<p><br></p>
+<h3 id="if-you-re-an-org-leader">If You're an Org Leader</h3><ul>
+<li><strong>Don't budget flat.</strong> Your "AI tooling" line item for a 50-person team isn't $12,000/year ($20 × 50 × 12). It's more like $30,000-60,000/year within 3 years if your team uses agentic features, and potentially much more.</li>
+<li><strong>Watch for stealth price increases.</strong> They won't come as sticker-price hikes. They'll come as credit systems, usage caps, throttling, and tiered plans. Same effect, less PR blowback.</li>
+<li><strong>The ROI still works.</strong> Even at 2-3x current prices, a \$50-100/month tool that makes a $150,000/year developer 20% more productive is a no-brainer. The economics of AI tooling are still overwhelmingly positive, just not <em>as</em> positive as today's subsidized prices suggest.</li>
+</ul>
+<p><br></p>
+<h2 id="methodology-notes">Methodology Notes</h2><p>Both analyses are open source and fully reproducible. The code is available in <a href="https://github.com/ronikobrosly/ai_token_economics">this repository</a>.</p>
+<p><strong>Unit Economics Waterfall</strong> (<code>unit_economics.py</code>): Deterministic, layer-by-layer cost decomposition from GPU hardware → cost per million tokens → cost per query → cost per developer-month → sustainable pricing. Cross-validated against public data from Cursor, GitHub Copilot, and Anthropic disclosures.</p>
+<p><strong>Monte Carlo Simulation</strong> (<code>simulation.py</code>): 100,000 iterations across 16 parameters with calibrated distributions (beta, lognormal, triangular, uniform). Uses a 6×6 Gaussian copula for parameter correlations, models three user segments with migration dynamics, applies an open-source price ceiling, and includes reverse migration (users downgrading when prices spike). Calibrated against known anchor points; all checks pass.</p>
+<p>Key sources include Epoch AI inference price trends, SaaStr/Tanay Jaipuria margin analysis, WSJ/Axios/The Information company financials, Introl Blog inference unit economics, and TokenBurner/Dev.to usage tracking data. Full citations in <code>methods.md</code>.</p>
+
+    </span>
+
+    
+    
+    
+    
+    
+
+  </div>
+
+</div>
+
+
+
+
+        </div>
+
+        <!-- Bottom Navigation (external links) -->
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://drive.google.com/file/d/1WL28EZU8ETd3F0cUMQvwSRA5rZcU__ci/view?usp=sharing" rel="">
+                            Resume</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/ronikobrosly" rel="">
+                            LinkedIn</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://github.com/ronikobrosly" rel="">
+                            GitHub</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://stackoverflow.com/users/2831487/slyron" rel="">
+                            Stack Overflow</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://bsky.app/profile/slykoby.bsky.social" rel="">
+                            Bluesky</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C21&amp;q=rw+kobrosly&amp;btnG=" rel="">
+                            Publications</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=roni.kobrosly@gmail.com&amp;su=Hi! Reaching out from your personal website...&amp;body=blah blah blah" rel="">
+                            Contact Me</a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</body>
