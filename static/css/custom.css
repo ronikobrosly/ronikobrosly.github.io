@@ -186,3 +186,91 @@ small p {
   color: var(--accent, #ff6347);
   text-decoration: underline;
 }
+
+/* Theme switcher button (color wheel) */
+.theme-switcher {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  vertical-align: middle;
+  outline: none;
+}
+
+.theme-switcher:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-switcher .color-wheel {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: block;
+  background: conic-gradient(
+    #ff6347, #eec35e, #8ec07c, #5ACCF0,
+    #6F49AB, #ee82cf, #ff6347
+  );
+  border: 1px solid var(--foreground, #45372b);
+}
+
+.theme-switcher-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  /* Stack nav links vertically */
+  .terminal-menu ul {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  /* Disable the timeline rail/marker on mobile so blog cards fit */
+  .terminal-timeline {
+    padding-left: 0;
+  }
+  .terminal-timeline::before,
+  .terminal-timeline .terminal-card::before {
+    display: none;
+  }
+
+  /* Keep blog card contents inside the card bounds */
+  .terminal-card {
+    padding: 12px 15px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .blog-card-container {
+    flex-direction: column;
+  }
+
+  .blog-card-left,
+  .blog-card-right {
+    min-width: 0;
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+
+  .blog-card-container img,
+  .terminal-card img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Reduce container padding a touch on small screens */
+  .container {
+    padding: 0 12px;
+  }
+}
+
