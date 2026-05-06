@@ -14,24 +14,30 @@
     <meta charset="utf-8">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../../../static/favicon.png">
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
 
     <!-- Open Graph Image -->
-    <meta property="og:image" content="../../../static/og-image.png">
+    <meta property="og:image" content="../../../../../static/og-image.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     
-    
-
-    
-    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
 
 
-    <link rel="stylesheet" href="../../../static/css/terminal.css" />
-    <link rel="stylesheet" href="../../../static/css/custom.css" />
-    <script src="../../../static/js/theme-switcher.js"></script>
+    
+
+<meta property="og:title" content="Printing my mother&#39;s cookbook with a little help from open source Qwen 3.6 + Pi">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/mom_cookbook' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
+    <script src="../../../../../static/js/theme-switcher.js"></script>
     <!-- Mathjax -->
     <!-- <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
@@ -57,7 +63,7 @@
 
 </head>
 
-<title>Blog - Roni Kobrosly's Personal Site</title>
+<title>Printing my mother&#39;s cookbook with a little help from open source Qwen 3.6 + Pi - Roni Kobrosly's Personal Site</title>
 
 <body>
     <div class="container">
@@ -144,47 +150,15 @@
         <!-- Body -->
         <div id="body">
             
-<div>
-
-<div class="btn-group" role="group" aria-label="pagination">
-  
-  <a href="/blog" class="btn btn-ghost">&laquo;</a>
-  
-
-  
-  <a href="/blog/page/4/" class="btn btn-ghost">4</a>
-  
-
-  
-  <a href="../5/" class="btn btn-ghost">5</a>
-  
-
-  <span class="btn btn-primary disabled">6</span>
-
-  
-
-  
-
-  
-  <a href="/blog/page/6/" class="btn btn-ghost disabled">&raquo;</a>
-  
-</div>
-
-<br>
-</div>
-<div class="terminal-timeline">
 
 
 <div class="terminal-card">
-  <header>
-    <a href="../../2018/9/24/automating_away_elbow_method/" class="card-title-link">
+  <header id="post_title" name="post_title">
 <!-- Set title style -->
-<span name="title" id="title">Automating away the &#34;elbow method&#34;</span>
-</a>
-  </header>
-  <div class="card-body blog-card-container">
-    <div>
-      
+<span name="title" id="title">Printing my mother&#39;s cookbook with a little help from open source Qwen 3.6 + Pi</span>
+</header>
+  <div class="card-body">
+    
 <!-- Append author -->
 <small>
   <p>
@@ -193,24 +167,19 @@
     Roni Kobrosly
     
     on
-    <span id="pub_date" name="pub_date">2018-09-24</span>
+    <span id="pub_date" name="pub_date">2026-05-05</span>
 
     
     | tags:
     <!-- Append tags after author -->
     <span class="boxed" id="tags" name="tags">
-      <a class="tags" href="../../tag/machine learning/">
-        machine learning
+      <a class="tags" href="../../../../tag/agentic ai/">
+        agentic ai
       </a>
     </span>
     <span class="boxed" id="tags" name="tags">
-      <a class="tags" href="../../tag/open source/">
-        open source
-      </a>
-    </span>
-    <span class="boxed" id="tags" name="tags">
-      <a class="tags" href="../../tag/statistics/">
-        statistics
+      <a class="tags" href="../../../../tag/food/">
+        food
       </a>
     </span>
     
@@ -218,145 +187,39 @@
   
 </small>
 
+    <hr>
+    
+    
+    <img src="logo.webp" style="padding: 10px;" >
+    
 
-      
-      
-      <a href="../../2018/9/24/automating_away_elbow_method/" style="text-decoration: none;">
-        <img src="../../2018/9/24/automating_away_elbow_method/logo.webp" >
-      </a>
-      
+    <span id="post_body" name="post_body">
+      <p>For years my mother had a secret squirreled away on her Dell machine 💻. She was assembling a collection of her favorite custom recipes and recipes from friends in a large Word document. This wasn't a handful of recipes; there were 100+ in total. Well, I was able to get my hands on it!</p>
+<p>There were a number of true bangers there and with Mother's Day coming up, I figured a memorable gift would be to publish and print it for family and friends. There were a few issues though:</p>
+<ul>
+<li>there wasn't a clean chapter structure to it</li>
+<li>there were misc typos and grammatical issues sprinkled throughout it</li>
+<li>she had about 30 other recipes hand-written on index cards in an old-fashioned recipe box.  </li>
+</ul>
+<p>A perfect use case for my home, open source agentic pipeline (a relatively lightweight Qwen 3.6 27B loaded into the Pi agent harness)! You might not be aware but as of mid 2026, open source LLMs are now half a step behind the expensive, proprietary frontier models. Honestly though, with benchmark saturation and organizations focusing all of their effort on maximizing some metric from a static test that is publicly-available, I'm not sure a 1-3% difference in some SWE benchmark means anything. There might not be any gap at all when it comes to real world performance. Not to mention the costs are an order of magnitude lower...</p>
+<p>Qwen and Pi took a task that would have taken 40+ hours into 5, tops. Qwen 3.6 natively reads images, so all I needed to do was point it to a folder with 30-ish jpegs. I used <a href="https://www.lulu.com">Lulu.com</a> for the printing, and voilà, you get what is shown in the above header image!</p>
+<p><a href="https://github.com/ronikobrosly/debby_cookbook/blob/main/output/cookbook_full.pdf">The book is freely-available as a PDF</a>, if you're interested. I highly recommend the Apple Dumplings. You won't be disappointed.</p>
+<p>Happy Mother's Day!! ♡♡♡</p>
+<p><img src="apple_dumplings.webp" alt=""></p>
 
-      <div class="blog-card-right">
-        
-        <span name="post_summary" id="post_summary">
-          <p class="card-text"><p>Sometimes when you're tuning a parameter in a machine learning, you end up needing to look at something like a <a href="https://en.wikipedia.org/wiki/Scree_plot">scree plot</a> to determine the best parameter value. It feels annoying and subjective. Here's a simple way to automate this away.</p>
-</p>
-        </span>
-        <small>
-          <a href="../../2018/9/24/automating_away_elbow_method/">Read on...</a>
-          
+    </span>
 
+    
+    
+    
+    
+    
 
-
-
-
-
-
-(377 words, approximately 2 minutes reading time)
-
-        </small>
-        
-      </div>
-    </div>
   </div>
-</div>
-
-
-
-<div class="terminal-card">
-  <header>
-    <a href="../../2014/12/17/socioeconomic_disad_counties/" class="card-title-link">
-<!-- Set title style -->
-<span name="title" id="title">Visualizing socioeconomic disadvantage across US counties</span>
-</a>
-  </header>
-  <div class="card-body blog-card-container">
-    <div>
-      
-<!-- Append author -->
-<small>
-  <p>
-    written by
-    
-    Roni Kobrosly
-    
-    on
-    <span id="pub_date" name="pub_date">2014-12-17</span>
-
-    
-    | tags:
-    <!-- Append tags after author -->
-    <span class="boxed" id="tags" name="tags">
-      <a class="tags" href="../../tag/human data/">
-        human data
-      </a>
-    </span>
-    <span class="boxed" id="tags" name="tags">
-      <a class="tags" href="../../tag/machine learning/">
-        machine learning
-      </a>
-    </span>
-    <span class="boxed" id="tags" name="tags">
-      <a class="tags" href="../../tag/statistics/">
-        statistics
-      </a>
-    </span>
-    
-  </p>
-  
-</small>
-
-
-      
-      
-      <a href="../../2014/12/17/socioeconomic_disad_counties/" style="text-decoration: none;">
-        <img src="../../2014/12/17/socioeconomic_disad_counties/logo.webp" >
-      </a>
-      
-
-      <div class="blog-card-right">
-        
-        <span name="post_summary" id="post_summary">
-          <p class="card-text"><p>When we create maps to view the spatial variation of socioeconomic status, we are typically only viewing the variation of one factor at a time (e.g. just income or just unemployment rate). I thought it would be useful to create and visualize a summary score of overall "socioeconomic disadvantage" from many socioeconomic indicators.</p>
-</p>
-        </span>
-        <small>
-          <a href="../../2014/12/17/socioeconomic_disad_counties/">Read on...</a>
-          
-
-
-
-
-
-
-
-
-
-(175 words, approximately 1 minute reading time)
-
-        </small>
-        
-      </div>
-    </div>
-  </div>
-</div>
-
 
 </div>
 
-<div class="btn-group" role="group" aria-label="pagination">
-  
-  <a href="/blog" class="btn btn-ghost">&laquo;</a>
-  
 
-  
-  <a href="/blog/page/4/" class="btn btn-ghost">4</a>
-  
-
-  
-  <a href="../5/" class="btn btn-ghost">5</a>
-  
-
-  <span class="btn btn-primary disabled">6</span>
-
-  
-
-  
-
-  
-  <a href="/blog/page/6/" class="btn btn-ghost disabled">&raquo;</a>
-  
-</div>
 
 
         </div>
