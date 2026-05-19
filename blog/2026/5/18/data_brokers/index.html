@@ -14,24 +14,30 @@
     <meta charset="utf-8">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../static/favicon.png">
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
 
     <!-- Open Graph Image -->
-    <meta property="og:image" content="../static/og-image.png">
+    <meta property="og:image" content="../../../../../static/og-image.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     
-    
-
-    
-    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
 
 
-    <link rel="stylesheet" href="../static/css/terminal.css" />
-    <link rel="stylesheet" href="../static/css/custom.css" />
-    <script src="../static/js/theme-switcher.js"></script>
+    
+
+<meta property="og:title" content="Scrubbing your details out of data broker databases">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/data_brokers' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
+    <script src="../../../../../static/js/theme-switcher.js"></script>
     <!-- Mathjax -->
     <!-- <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
@@ -57,7 +63,7 @@
 
 </head>
 
-<title>Tags - Roni Kobrosly's Personal Site</title>
+<title>Scrubbing your details out of data broker databases - Roni Kobrosly's Personal Site</title>
 
 <body>
     <div class="container">
@@ -88,7 +94,7 @@
                         
                         
                         
-                        <a href="/blog" rel="">Blog</a>
+                        <a class="terminal-prompt" href="/blog" rel="">Blog</a>
                         
                     </li>
                     
@@ -144,152 +150,67 @@
         <!-- Body -->
         <div id="body">
             
-<h1><i class="fas fa-tag"></i> Tags</h1>
 
 
-
-  
+<div class="terminal-card">
+  <header id="post_title" name="post_title">
+<!-- Set title style -->
+<span name="title" id="title">Scrubbing your details out of data broker databases</span>
+</header>
+  <div class="card-body">
     
-  
+<!-- Append author -->
+<small>
+  <p>
+    written by
     
-  
-
-  
+    Roni Kobrosly
     
-  
+    on
+    <span id="pub_date" name="pub_date">2026-05-18</span>
 
-  
     
-  
+    | tags:
+    <!-- Append tags after author -->
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/engineering/">
+        engineering
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/open source/">
+        open source
+      </a>
+    </span>
     
+  </p>
   
+</small>
 
-  
+    <hr>
     
-  
     
-  
+    <img src="logo.webp" style="padding: 10px;" >
     
-  
+
+    <span id="post_body" name="post_body">
+      <p>I was scrolling through HackerNews the other day when I stumbled onto <code>auto-identity-remove</code>, <a href="https://github.com/stephenlthorn/auto-identity-remove">an open-source project that automates the painfully tedious process of opting out of data brokers and people-search sites</a>. The premise immediately hooked me: instead of paying $40–$100 a year for a service like Incogni or Optery, you run a script that uses Playwright to fill out opt-out forms across 500+ brokers (Spokeo, WhitePages, Acxiom, LexisNexis, etc). It can run on a monthly schedule, with CAPTCHA solving and persistent state tracking so it doesn't resubmit completed removals. Privacy tooling that's transparent, local-first, and free is exactly the kind of thing I want to see more of, and I figured the best way to support it was to actually contribute.</p>
+<p>The one catch was that the project was macOS-only. It leaned on AppleScript for iMessage notifications, osascript for Mail.app emails, launchd for scheduling, and open for browser launches. The commit I wrote added full Linux support: swapping in notify-send for desktop notifications, sendmail/mail for email opt-outs, xdg-open for browser handoffs, and generating systemd user timer units instead of launchd plists for the monthly schedule. The setup script now detects your platform and walks you through the right path, and the Playwright browsers cache resolves to the correct location on each OS. If you're a Linux user who cares about scrubbing your data off people-search sites, the project should now work end-to-end for you and if you want to help expand broker coverage or tighten up selectors, the repo is very open to PRs.</p>
+
+    </span>
+
     
-  
-
-  
     
-  
-
-  
     
-  
     
-  
-
-  
-
-  
-
-  
-
-  
     
-  
-    
-  
 
-  
+  </div>
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-  
-
-  
-
-  
-    
-  
-
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-
-  
-    
-  
-
-  
-
-  
-    
-  
-
-  
-
-  
+</div>
 
 
-<ul>
-  
-    <li><a href="/blog/tag/agentic ai">agentic ai</a></li>
-  
-    <li><a href="/blog/tag/career">career</a></li>
-  
-    <li><a href="/blog/tag/causal inference">causal inference</a></li>
-  
-    <li><a href="/blog/tag/data">data</a></li>
-  
-    <li><a href="/blog/tag/data leadership">data leadership</a></li>
-  
-    <li><a href="/blog/tag/economics">economics</a></li>
-  
-    <li><a href="/blog/tag/engineering">engineering</a></li>
-  
-    <li><a href="/blog/tag/food">food</a></li>
-  
-    <li><a href="/blog/tag/generative ai">generative ai</a></li>
-  
-    <li><a href="/blog/tag/human data">human data</a></li>
-  
-    <li><a href="/blog/tag/images">images</a></li>
-  
-    <li><a href="/blog/tag/machine learning">machine learning</a></li>
-  
-    <li><a href="/blog/tag/observability">observability</a></li>
-  
-    <li><a href="/blog/tag/open source">open source</a></li>
-  
-    <li><a href="/blog/tag/personal updates">personal updates</a></li>
-  
-    <li><a href="/blog/tag/product management">product management</a></li>
-  
-    <li><a href="/blog/tag/pydata">pydata</a></li>
-  
-    <li><a href="/blog/tag/scipy">scipy</a></li>
-  
-    <li><a href="/blog/tag/simulation">simulation</a></li>
-  
-    <li><a href="/blog/tag/statistics">statistics</a></li>
-  
-</ul>
+
 
         </div>
 
