@@ -1,0 +1,354 @@
+<!doctype html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TT9MYHW754"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TT9MYHW754');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="../../../../../static/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
+
+
+    
+
+<meta property="og:title" content="Learning Rust in the agentic era">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/first_rust_app' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
+    <script src="../../../../../static/js/theme-switcher.js"></script>
+    <!-- Mathjax -->
+    <!-- <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script> -->
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+
+</head>
+
+<title>Learning Rust in the agentic era - Roni Kobrosly's Personal Site</title>
+
+<body>
+    <div class="container">
+        <h1 class="logo">
+            <a href="/">
+                Roni Kobrosly Ph.D.'s Website
+            </a>
+        </h1>
+        <!-- Top Navigation (local links) -->
+
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/" rel="">Home</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a class="terminal-prompt" href="/blog" rel="">Blog</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/open-source" rel="">Open Source</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/talks" rel="">Talks</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/art" rel="">Art</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/bio" rel="">Bio</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item theme-switcher-item">
+                        <button type="button" class="theme-switcher" aria-label="Cycle color theme" title="Cycle color theme">
+                            <span class="color-wheel" aria-hidden="true"></span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Body -->
+        <div id="body">
+            
+
+
+<div class="terminal-card">
+  <header id="post_title" name="post_title">
+<!-- Set title style -->
+<span name="title" id="title">Learning Rust in the agentic era</span>
+</header>
+  <div class="card-body">
+    
+<!-- Append author -->
+<small>
+  <p>
+    written by
+    
+    Roni Kobrosly
+    
+    on
+    <span id="pub_date" name="pub_date">2026-06-07</span>
+
+    
+    | tags:
+    <!-- Append tags after author -->
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/agentic ai/">
+        agentic ai
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/engineering/">
+        engineering
+      </a>
+    </span>
+    
+  </p>
+  
+</small>
+
+    <hr>
+    
+    
+    <img src="logo.webp" style="padding: 10px;" >
+    
+
+    <span id="post_body" name="post_body">
+      <p>In late 2025 at work, I wrote (well, Claude Code and I co-wrote) 30,000+ lines of python code for a microservice that was parsing PDFs, interacting with some APIs, chunking text, and writing the results to a vector database, along with the full suite of tests, helper scripts, etc. This app did no AI/ML in and of itself, it was pure, straight up ETL and software engineering. Now, ostensibly I am a statistics/AI/ML/data person, I actually really enjoy pure software engineering. SWE feels very practical and, I suppose, "pure" in a way; <a href="https://ronikobrosly.github.io/blog/2023/10/6/ml_failure_funnel/">there isn't a need to pitch an algorithm to another team, which can be tiring</a>. I'm just building out a thing with engineering principles. That said, this wasn't fun for several reasons:</p>
+<ul>
+<li>Without getting into the details, there was a ton of complex state management (does the document needs to be chunked, was the document was already chunked, how well was it chunked, is there a new version of this document available, how does it compare with the prior versions, etc etc... ), which meant there were a bunch of subtle failure modes.</li>
+<li>My poor python app was choking on the input artifacts; this was a I/O bound process because it involved processing many 1000+ page PDF documents...</li>
+<li>There are 10+ python PDF parsers out there on PyPI and they all suck. Okay, admittedly, PDF parser is hard since PDFs are basically collections of coordinates and glyph shapes instead of highly structured docs, but still, I found various advantages with each parser but none that checked most of the boxes in a satisfying way.</li>
+<li>The app needed to keep track of tons of mutable objects and if-else arms and operations that would slightly tweak values, and I struggled with approaches for rigorously making sure things had values they needed to have while writing with a good amount of encapsulation and abstraction. </li>
+</ul>
+<p>I'll stop there 🙃</p>
+<p>It became clear I could use a framework that was stricter about states and if-else logic, faster, would do a better job of watching my back as I built out a relatively-large codebase. I don't know how to code it, but I really liked everything I heard about Rust and the community around it. There is no <a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">Benevolent dictator for life</a> personality behind it, it's <a href="https://survey.stackoverflow.co/2025/technology/#admired-and-desired">consistently the most admired programming languages</a>, it is hella fast (faster than python by orders of magnitude, and faster than other up-and-coming languages like Go too), how the rust compiler eliminates entire classes of bugs and security issues that can occur in software building, and I've repeatedly heard that the rust team <a href="https://medium.com/@lotharthesavior/the-billion-dollar-mistake-and-how-rust-aims-to-solve-it-dd34b21d088c">actively tried to incorporate software engineering lessons learned from all the prior decades of software building</a>.</p>
+<p>Also there was something appealing about becoming fluent in python and rust: I could use python for exploration, data analysis, simple and fast scripting, and stats/AI/ML, and then use rust as my powerhouse for heavy ETL jobs and straight ahead software engineering. The Yin and the Yang.</p>
+<p>...but this got me thinking: <code>is it worth it to learn a new programming language these days??</code> I've been hearing from <a href="https://en.wikipedia.org/wiki/Sam_Altman">the top AI salesperson</a> and my family members that aren't in the tech field that writing code is dead! Also, I read that "<a href="https://medium.com/jeroen-rosenberg/english-is-the-new-programming-language-to-learn-ea113bdc5ba6">English is the New Programming Language to Learn</a>" from some guy I don't know!</p>
+<p><img src="sam_altman.webp" alt=""></p>
+<p>If it isn't already obvious from the blog post summary and my tone, I ultimately think it is worth it for these reasons:</p>
+<p>1) I need to be able to confidently review agent-generated code
+2)  Understanding Rust will help me request the most-appropriate, idiomatic patterns and architecture
+3)  Everything I saw in my initial research suggested that Rust requires totally different approach to thinking about software than python. If I want to learn these paradigm-level lessons, I need to put in the reps and get comfortable with the language.</p>
+<p>So, I read the official Rust book (AKA “the book”), did the Rustlings exercises, and started working on a rinky dinky CLI tool that would help with a problem I’ve been dealing with recently. I have to say, in an odd way, this old-fashioned process felt a bit like an act of rebellion in this agent age. It had been a while since I was stumped when writing particular <em>single</em> line of code and searched through documentation to figure out the syntax. Heh, in a particular moment like this, I imagined myself churning butter. </p>
+<p>While this was truly “Learning Rust the Hard Way” (lol, I learned python <a href="https://learnpythonthehardway.org/">"the hard way"</a>), I did try to incorporate AI (I’m no luddite). It could be a powerful way to get assistance <em>as long as it didn’t give me a shortcut through the learning process</em>. As you probably know, a single prompt to in Pi/OpenCode/Claude Code will happily generate hundreds of lines for you (if not more). I need to dramatically restrain my agent. Basically, I needed a <code>AGENTS.md</code> file like the following.</p>
+<p>By the way, my rinky dinky “hello world”-like Rust app was a CLI tool that quickly generates a secure password for you. I’ve been signing up for a lot of new services lately and wanted something quick and local to spit out some strong key. Anyways, the markdown file:</p>
+<p>I needed a <code>AGENTS.md</code> file that would help me learn rust.</p>
+<pre><code># AGENTS.md
+
+## Project overview
+
+QuickPass is a Rust CLI tool for generating secure passwords. It uses `clap` for argument parsing.
+
+## Learning Approach
+
+I want to use AI as a learning tool to help me master Rust. Please follow these guidelines:
+
+1. **DO NOT write code for me** — I want to write all the code myself. Never provide a full code block as a solution.
+2. **DO provide explanations** — Help me understand Rust concepts, patterns, and idioms. Explain the _why_, not just the _what_.
+3. **DO suggest approaches** — Give me high-level guidance on how to implement features or solve problems. Describe the strategy, not the implementation.
+4. **DO review my code** — Provide constructive feedback on code I've written. Point out where it could be more idiomatic, safer, or clearer.
+5. **DO answer questions** — Explain Rust concepts when I ask about them. Dive deep into ownership, borrowing, lifetimes, traits, error handling, etc.
+6. **DO provide small examples** — When relevant, show compact, self-contained examples to illustrate a concept. These should be abstractions, not solutions to my current task.
+7. **DO teach me to read Rust compiler errors** — Guide me through understanding error messages rather than just telling me the fix.
+8. **DO suggest refactoring opportunities** — After I implement something, point out how it could be restructured to be more Rust-idiomatic (e.g., using iterators instead of loops, leveraging `Option`/`Result` combinators).
+
+## Session Guidelines
+
+- **Keep sessions short and focused** — If we are starting on a new feature or task, suggest starting a fresh session. This prevents context bloat and hallucinations.
+- **Break down problems together** — Help me decompose larger features into small, manageable steps I can implement one at a time.
+- **Progressive complexity** — Encourage me to start with the simplest working version, then iterate. I don't want to over-engineer upfront.
+
+## Build &amp; test commands
+
+- Build: `cargo build`
+- Release build: `cargo build --release`
+- Run tests: `cargo test`
+- Lint: `cargo clippy`
+- Format: `cargo fmt`
+- Generate docs: `cargo doc --open`
+- Check without building: `cargo check`
+
+## Rust learning principles
+
+- **Ownership and borrowing** — When I hit a borrow-checker error, explain what's happening and why Rust requires it, not just how to fix it.
+- **Error handling** — Guide me toward using `Result`, `Option`, `?` operator, and the `thiserror` / `anyhow` crates appropriately.
+- **Traits and generics** — Encourage me to use traits for abstraction. When a pattern repeats, suggest extracting a trait.
+- **Pattern matching** — Show me how to leverage `match`, `if let`, `while let`, and destructuring.
+- **Iterators and closures** — Guide me away from imperative loops toward iterator combinators (`map`, `filter`, `fold`, `collect`, etc.).
+- **Module system** — Teach me about `mod`, `use`, `pub`, and how to structure a Rust project cleanly.
+- **Testing culture** — Encourage me to write tests alongside each feature. Show me how to use `#[test]`, `assert!`, `assert_eq!`, and integration tests in `tests/`.
+
+## Code conventions
+
+- Rust edition 2024
+- Follow standard Rust naming conventions (snake_case for functions/variables, CamelCase for types)
+- Keep functions small and focused
+- Prefer `&amp;str` over `&amp;String` for function parameters
+- Prefer returning `Result` over panicking
+- Use `#[derive]` for standard traits when possible
+
+## Post-change checks
+
+After every code change (edit, write), you MUST run both of these commands and fix any issues they report:
+
+```sh
+cargo fmt
+cargo clippy
+</code></pre>
+<p>If <code>cargo clippy</code> reports any warnings or errors, fix them immediately. Treat all clippy warnings as errors that must be resolved.</p>
+<p>```</p>
+<p>So, did it work? Mostly yes, with some caveats.</p>
+<p>The AGENTS.md discipline held up surprisingly well in practice. It forced me to stay in the driver’s seat. When I hit a borrow checker error (and Jesus Herbert Christ did I hit borrow checker errors), my instinct was to paste the error and ask for a fix. Instead, I’d ask something like “can you explain what this error is telling me about ownership here? And can you give me some new examples to help drive the point home?” The difference in what I retained was night and day. No lie, some of my most productive sessions (in terms of expanding my brain) were the ones where I came away having written maybe five lines of working code after thirty minutes of back-and-forth about why those five lines needed to look the way they did.</p>
+<p>That said, the guardrails took active effort to maintain. There’s a gravitational pull toward just asking for the answer, especially when you’re tired and the compiler is yelling at you for the fourth time about a lifetime annotation. I slipped occasionally. I’d notice I’d been handed a full code block and had to consciously stop, delete it without reading it too carefully, and rephrase my question. </p>
+<p>On the Rust side: ownership and borrowing are as brain-bending as advertised, and I say that as someone who thinks carefully about memory and state management professionally. The moment things started clicking was when I stopped fighting the borrow checker and started treating its errors as a conversation. The compiler is surfacing a real ambiguity in your reasoning about who owns what and when. Once I internalized that framing, the errors became genuinely informative rather than just frustrating. Lifetimes, on the other hand, remain in the “respect but unease” category for me. I’ll get there.</p>
+<p>QuickPass itself ain't exactly a magnum opus. it’s a few hundred lines, generates passwords with configurable length and character set flags, and does it correctly and fast. Not exactly a portfolio piece. But it served its purpose: it’s a real thing that compiles, runs, and solves a problem I actually have, and I wrote essentially every line of it myself. There’s something satisfying about that.</p>
+<p>Which brings me back to the original question: is it worth learning a new programming language in the agent age?</p>
+<p>I think the framing of “coding is dead” fundamentally misunderstands what coding is. Computers understand binary and would be quite happy just sticking with that. Never forget that coding is a layer specifically for humans. The part that’s being automated (the rote translation of a clear spec into syntactically correct lines ) was never really the interesting part. What remains, and what agents currently cannot do reliably, is thinking carefully about what you’re building: the architecture decisions, the failure mode analysis, knowing when a pattern is subtly wrong even if it compiles, choosing patterns that account for the organization you belong to, etc.</p>
+<p>Beyond that, I’d argue the agent age makes deep language knowledge more valuable, not less. When you’re reviewing agent-generated Rust, you need to know whether the code is idiomatic or whether the agent took the easy path in a way that will hurt you later. Agents will confidently write un-Rusty Rust — imperative loops where iterators belong, unnecessary clones to paper over ownership issues, error handling that’s technically functional but architecturally lazy. Catching that requires having internalized the language well enough that bad code gives you a mild aesthetic offense before you’ve even articulated why.</p>
+<p>So yeah, I’m okay with this exercise in churning butter. There’s a kind of understanding you only get by going slowly. Working slowly and gaining technical "muscle" is worth defending.</p>
+<p><img src="butter.webp" alt=""></p>
+
+    </span>
+
+    
+    
+    
+    
+    
+
+  </div>
+
+</div>
+
+
+
+
+        </div>
+
+        <!-- Bottom Navigation (external links) -->
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://drive.proton.me/urls/2ZK3EQS7K0#1eW7q8roCLeD" rel="">
+                            Resume</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/ronikobrosly" rel="">
+                            LinkedIn</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://github.com/ronikobrosly" rel="">
+                            GitHub</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://stackoverflow.com/users/2831487/slyron" rel="">
+                            Stack Overflow</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C21&amp;q=rw+kobrosly&amp;btnG=" rel="">
+                            Publications</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gpg" rel="">
+                            Public GPG Key</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="mailto:roni.kobrosly@proton.me" rel="">
+                            Contact Me</a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</body>

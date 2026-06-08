@@ -1,5 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Roni Kobrosly's Blog</title><link href="https://ronikobrosly.github.io/blog/" rel="alternate"/><link href="https://ronikobrosly.github.io/blog.xml" rel="self"/><id>urn:uuid:007c747c-eada-3f78-b5ac-130019991688</id><updated>2026-05-18T00:00:00Z</updated><author><name/></author><entry><title>Scrubbing your details out of data broker databases</title><link href="https://ronikobrosly.github.io/blog/2026/5/18/data_brokers/" rel="alternate"/><updated>2026-05-18T00:00:00Z</updated><author><name>Roni Kobrosly</name></author><id>urn:uuid:7115e250-3840-3e46-9ea7-44559a21b4b5</id><content type="html">&lt;p&gt;I was scrolling through HackerNews the other day when I stumbled onto &lt;code&gt;auto-identity-remove&lt;/code&gt;, &lt;a href="https://github.com/stephenlthorn/auto-identity-remove"&gt;an open-source project that automates the painfully tedious process of opting out of data brokers and people-search sites&lt;/a&gt;. The premise immediately hooked me: instead of paying $40–$100 a year for a service like Incogni or Optery, you run a script that uses Playwright to fill out opt-out forms across 500+ brokers (Spokeo, WhitePages, Acxiom, LexisNexis, etc). It can run on a monthly schedule, with CAPTCHA solving and persistent state tracking so it doesn't resubmit completed removals. Privacy tooling that's transparent, local-first, and free is exactly the kind of thing I want to see more of, and I figured the best way to support it was to actually contribute.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Roni Kobrosly's Blog</title><link href="https://ronikobrosly.github.io/blog/" rel="alternate"/><link href="https://ronikobrosly.github.io/blog.xml" rel="self"/><id>urn:uuid:007c747c-eada-3f78-b5ac-130019991688</id><updated>2026-06-07T00:00:00Z</updated><author><name/></author><entry><title>Learning Rust in the agentic era</title><link href="https://ronikobrosly.github.io/blog/2026/6/7/first_rust_app/" rel="alternate"/><updated>2026-06-07T00:00:00Z</updated><author><name>Roni Kobrosly</name></author><id>urn:uuid:5215e5f8-5d59-315d-bdb3-fd7efbc93884</id><content type="html">&lt;p&gt;In late 2025 at work, I wrote (well, Claude Code and I co-wrote) 30,000+ lines of python code for a microservice that was parsing PDFs, interacting with some APIs, chunking text, and writing the results to a vector database, along with the full suite of tests, helper scripts, etc. This app did no AI/ML in and of itself, it was pure, straight up ETL and software engineering. Now, ostensibly I am a statistics/AI/ML/data person, I actually really enjoy pure software engineering. SWE feels very practical and, I suppose, "pure" in a way; &lt;a href="https://ronikobrosly.github.io/blog/2023/10/6/ml_failure_funnel/"&gt;there isn't a need to pitch an algorithm to another team, which can be tiring&lt;/a&gt;. I'm just building out a thing with engineering principles. That said, this wasn't fun for several reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Without getting into the details, there was a ton of complex state management (does the document needs to be chunked, was the document was already chunked, how well was it chunked, is there a new version of this document available, how does it compare with the prior versions, etc etc... ), which meant there were a bunch of subtle failure modes.&lt;/li&gt;
+&lt;li&gt;My poor python app was choking on the input artifacts; this was a I/O bound process because it involved processing many 1000+ page PDF documents...&lt;/li&gt;
+&lt;li&gt;There are 10+ python PDF parsers out there on PyPI and they all suck. Okay, admittedly, PDF parser is hard since PDFs are basically collections of coordinates and glyph shapes instead of highly structured docs, but still, I found various advantages with each parser but none that checked most of the boxes in a satisfying way.&lt;/li&gt;
+&lt;li&gt;The app needed to keep track of tons of mutable objects and if-else arms and operations that would slightly tweak values, and I struggled with approaches for rigorously making sure things had values they needed to have while writing with a good amount of encapsulation and abstraction. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I'll stop there 🙃&lt;/p&gt;
+&lt;p&gt;It became clear I could use a framework that was stricter about states and if-else logic, faster, would do a better job of watching my back as I built out a relatively-large codebase. I don't know how to code it, but I really liked everything I heard about Rust and the community around it. There is no &lt;a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life"&gt;Benevolent dictator for life&lt;/a&gt; personality behind it, it's &lt;a href="https://survey.stackoverflow.co/2025/technology/#admired-and-desired"&gt;consistently the most admired programming languages&lt;/a&gt;, it is hella fast (faster than python by orders of magnitude, and faster than other up-and-coming languages like Go too), how the rust compiler eliminates entire classes of bugs and security issues that can occur in software building, and I've repeatedly heard that the rust team &lt;a href="https://medium.com/@lotharthesavior/the-billion-dollar-mistake-and-how-rust-aims-to-solve-it-dd34b21d088c"&gt;actively tried to incorporate software engineering lessons learned from all the prior decades of software building&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Also there was something appealing about becoming fluent in python and rust: I could use python for exploration, data analysis, simple and fast scripting, and stats/AI/ML, and then use rust as my powerhouse for heavy ETL jobs and straight ahead software engineering. The Yin and the Yang.&lt;/p&gt;
+&lt;p&gt;...but this got me thinking: &lt;code&gt;is it worth it to learn a new programming language these days??&lt;/code&gt; I've been hearing from &lt;a href="https://en.wikipedia.org/wiki/Sam_Altman"&gt;the top AI salesperson&lt;/a&gt; and my family members that aren't in the tech field that writing code is dead! Also, I read that "&lt;a href="https://medium.com/jeroen-rosenberg/english-is-the-new-programming-language-to-learn-ea113bdc5ba6"&gt;English is the New Programming Language to Learn&lt;/a&gt;" from some guy I don't know!&lt;/p&gt;
+&lt;p&gt;&lt;img src="sam_altman.webp" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;If it isn't already obvious from the blog post summary and my tone, I ultimately think it is worth it for these reasons:&lt;/p&gt;
+&lt;p&gt;1) I need to be able to confidently review agent-generated code
+2)  Understanding Rust will help me request the most-appropriate, idiomatic patterns and architecture
+3)  Everything I saw in my initial research suggested that Rust requires totally different approach to thinking about software than python. If I want to learn these paradigm-level lessons, I need to put in the reps and get comfortable with the language.&lt;/p&gt;
+&lt;p&gt;So, I read the official Rust book (AKA “the book”), did the Rustlings exercises, and started working on a rinky dinky CLI tool that would help with a problem I’ve been dealing with recently. I have to say, in an odd way, this old-fashioned process felt a bit like an act of rebellion in this agent age. It had been a while since I was stumped when writing particular &lt;em&gt;single&lt;/em&gt; line of code and searched through documentation to figure out the syntax. Heh, in a particular moment like this, I imagined myself churning butter. &lt;/p&gt;
+&lt;p&gt;While this was truly “Learning Rust the Hard Way” (lol, I learned python &lt;a href="https://learnpythonthehardway.org/"&gt;"the hard way"&lt;/a&gt;), I did try to incorporate AI (I’m no luddite). It could be a powerful way to get assistance &lt;em&gt;as long as it didn’t give me a shortcut through the learning process&lt;/em&gt;. As you probably know, a single prompt to in Pi/OpenCode/Claude Code will happily generate hundreds of lines for you (if not more). I need to dramatically restrain my agent. Basically, I needed a &lt;code&gt;AGENTS.md&lt;/code&gt; file like the following.&lt;/p&gt;
+&lt;p&gt;By the way, my rinky dinky “hello world”-like Rust app was a CLI tool that quickly generates a secure password for you. I’ve been signing up for a lot of new services lately and wanted something quick and local to spit out some strong key. Anyways, the markdown file:&lt;/p&gt;
+&lt;p&gt;I needed a &lt;code&gt;AGENTS.md&lt;/code&gt; file that would help me learn rust.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# AGENTS.md
+
+## Project overview
+
+QuickPass is a Rust CLI tool for generating secure passwords. It uses `clap` for argument parsing.
+
+## Learning Approach
+
+I want to use AI as a learning tool to help me master Rust. Please follow these guidelines:
+
+1. **DO NOT write code for me** — I want to write all the code myself. Never provide a full code block as a solution.
+2. **DO provide explanations** — Help me understand Rust concepts, patterns, and idioms. Explain the _why_, not just the _what_.
+3. **DO suggest approaches** — Give me high-level guidance on how to implement features or solve problems. Describe the strategy, not the implementation.
+4. **DO review my code** — Provide constructive feedback on code I've written. Point out where it could be more idiomatic, safer, or clearer.
+5. **DO answer questions** — Explain Rust concepts when I ask about them. Dive deep into ownership, borrowing, lifetimes, traits, error handling, etc.
+6. **DO provide small examples** — When relevant, show compact, self-contained examples to illustrate a concept. These should be abstractions, not solutions to my current task.
+7. **DO teach me to read Rust compiler errors** — Guide me through understanding error messages rather than just telling me the fix.
+8. **DO suggest refactoring opportunities** — After I implement something, point out how it could be restructured to be more Rust-idiomatic (e.g., using iterators instead of loops, leveraging `Option`/`Result` combinators).
+
+## Session Guidelines
+
+- **Keep sessions short and focused** — If we are starting on a new feature or task, suggest starting a fresh session. This prevents context bloat and hallucinations.
+- **Break down problems together** — Help me decompose larger features into small, manageable steps I can implement one at a time.
+- **Progressive complexity** — Encourage me to start with the simplest working version, then iterate. I don't want to over-engineer upfront.
+
+## Build &amp;amp; test commands
+
+- Build: `cargo build`
+- Release build: `cargo build --release`
+- Run tests: `cargo test`
+- Lint: `cargo clippy`
+- Format: `cargo fmt`
+- Generate docs: `cargo doc --open`
+- Check without building: `cargo check`
+
+## Rust learning principles
+
+- **Ownership and borrowing** — When I hit a borrow-checker error, explain what's happening and why Rust requires it, not just how to fix it.
+- **Error handling** — Guide me toward using `Result`, `Option`, `?` operator, and the `thiserror` / `anyhow` crates appropriately.
+- **Traits and generics** — Encourage me to use traits for abstraction. When a pattern repeats, suggest extracting a trait.
+- **Pattern matching** — Show me how to leverage `match`, `if let`, `while let`, and destructuring.
+- **Iterators and closures** — Guide me away from imperative loops toward iterator combinators (`map`, `filter`, `fold`, `collect`, etc.).
+- **Module system** — Teach me about `mod`, `use`, `pub`, and how to structure a Rust project cleanly.
+- **Testing culture** — Encourage me to write tests alongside each feature. Show me how to use `#[test]`, `assert!`, `assert_eq!`, and integration tests in `tests/`.
+
+## Code conventions
+
+- Rust edition 2024
+- Follow standard Rust naming conventions (snake_case for functions/variables, CamelCase for types)
+- Keep functions small and focused
+- Prefer `&amp;amp;str` over `&amp;amp;String` for function parameters
+- Prefer returning `Result` over panicking
+- Use `#[derive]` for standard traits when possible
+
+## Post-change checks
+
+After every code change (edit, write), you MUST run both of these commands and fix any issues they report:
+
+```sh
+cargo fmt
+cargo clippy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If &lt;code&gt;cargo clippy&lt;/code&gt; reports any warnings or errors, fix them immediately. Treat all clippy warnings as errors that must be resolved.&lt;/p&gt;
+&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;So, did it work? Mostly yes, with some caveats.&lt;/p&gt;
+&lt;p&gt;The AGENTS.md discipline held up surprisingly well in practice. It forced me to stay in the driver’s seat. When I hit a borrow checker error (and Jesus Herbert Christ did I hit borrow checker errors), my instinct was to paste the error and ask for a fix. Instead, I’d ask something like “can you explain what this error is telling me about ownership here? And can you give me some new examples to help drive the point home?” The difference in what I retained was night and day. No lie, some of my most productive sessions (in terms of expanding my brain) were the ones where I came away having written maybe five lines of working code after thirty minutes of back-and-forth about why those five lines needed to look the way they did.&lt;/p&gt;
+&lt;p&gt;That said, the guardrails took active effort to maintain. There’s a gravitational pull toward just asking for the answer, especially when you’re tired and the compiler is yelling at you for the fourth time about a lifetime annotation. I slipped occasionally. I’d notice I’d been handed a full code block and had to consciously stop, delete it without reading it too carefully, and rephrase my question. &lt;/p&gt;
+&lt;p&gt;On the Rust side: ownership and borrowing are as brain-bending as advertised, and I say that as someone who thinks carefully about memory and state management professionally. The moment things started clicking was when I stopped fighting the borrow checker and started treating its errors as a conversation. The compiler is surfacing a real ambiguity in your reasoning about who owns what and when. Once I internalized that framing, the errors became genuinely informative rather than just frustrating. Lifetimes, on the other hand, remain in the “respect but unease” category for me. I’ll get there.&lt;/p&gt;
+&lt;p&gt;QuickPass itself ain't exactly a magnum opus. it’s a few hundred lines, generates passwords with configurable length and character set flags, and does it correctly and fast. Not exactly a portfolio piece. But it served its purpose: it’s a real thing that compiles, runs, and solves a problem I actually have, and I wrote essentially every line of it myself. There’s something satisfying about that.&lt;/p&gt;
+&lt;p&gt;Which brings me back to the original question: is it worth learning a new programming language in the agent age?&lt;/p&gt;
+&lt;p&gt;I think the framing of “coding is dead” fundamentally misunderstands what coding is. Computers understand binary and would be quite happy just sticking with that. Never forget that coding is a layer specifically for humans. The part that’s being automated (the rote translation of a clear spec into syntactically correct lines ) was never really the interesting part. What remains, and what agents currently cannot do reliably, is thinking carefully about what you’re building: the architecture decisions, the failure mode analysis, knowing when a pattern is subtly wrong even if it compiles, choosing patterns that account for the organization you belong to, etc.&lt;/p&gt;
+&lt;p&gt;Beyond that, I’d argue the agent age makes deep language knowledge more valuable, not less. When you’re reviewing agent-generated Rust, you need to know whether the code is idiomatic or whether the agent took the easy path in a way that will hurt you later. Agents will confidently write un-Rusty Rust — imperative loops where iterators belong, unnecessary clones to paper over ownership issues, error handling that’s technically functional but architecturally lazy. Catching that requires having internalized the language well enough that bad code gives you a mild aesthetic offense before you’ve even articulated why.&lt;/p&gt;
+&lt;p&gt;So yeah, I’m okay with this exercise in churning butter. There’s a kind of understanding you only get by going slowly. Working slowly and gaining technical "muscle" is worth defending.&lt;/p&gt;
+&lt;p&gt;&lt;img src="butter.webp" alt=""&gt;&lt;/p&gt;
+</content></entry><entry><title>Scrubbing your details out of data broker databases</title><link href="https://ronikobrosly.github.io/blog/2026/5/18/data_brokers/" rel="alternate"/><updated>2026-05-18T00:00:00Z</updated><author><name>Roni Kobrosly</name></author><id>urn:uuid:7115e250-3840-3e46-9ea7-44559a21b4b5</id><content type="html">&lt;p&gt;I was scrolling through HackerNews the other day when I stumbled onto &lt;code&gt;auto-identity-remove&lt;/code&gt;, &lt;a href="https://github.com/stephenlthorn/auto-identity-remove"&gt;an open-source project that automates the painfully tedious process of opting out of data brokers and people-search sites&lt;/a&gt;. The premise immediately hooked me: instead of paying $40–$100 a year for a service like Incogni or Optery, you run a script that uses Playwright to fill out opt-out forms across 500+ brokers (Spokeo, WhitePages, Acxiom, LexisNexis, etc). It can run on a monthly schedule, with CAPTCHA solving and persistent state tracking so it doesn't resubmit completed removals. Privacy tooling that's transparent, local-first, and free is exactly the kind of thing I want to see more of, and I figured the best way to support it was to actually contribute.&lt;/p&gt;
 &lt;p&gt;The one catch was that the project was macOS-only. It leaned on AppleScript for iMessage notifications, osascript for Mail.app emails, launchd for scheduling, and open for browser launches. The commit I wrote added full Linux support: swapping in notify-send for desktop notifications, sendmail/mail for email opt-outs, xdg-open for browser handoffs, and generating systemd user timer units instead of launchd plists for the monthly schedule. The setup script now detects your platform and walks you through the right path, and the Playwright browsers cache resolves to the correct location on each OS. If you're a Linux user who cares about scrubbing your data off people-search sites, the project should now work end-to-end for you and if you want to help expand broker coverage or tighten up selectors, the repo is very open to PRs.&lt;/p&gt;
 </content></entry><entry><title>Giving myself permission to enjoy pointless, nerdy stuff.</title><link href="https://ronikobrosly.github.io/blog/2026/5/14/is_it_worth_it_to_learn_rust/" rel="alternate"/><updated>2026-05-14T00:00:00Z</updated><author><name>Roni Kobrosly</name></author><id>urn:uuid:76d86de8-79a2-3729-8d83-78f3c804805f</id><content type="html">&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;h3 id="so-you-think-you-re-a-nerd.."&gt;So you think you're a nerd...&lt;/h3&gt;&lt;p&gt;One of the most consistent things I've enjoyed throughout my life is learning. I don't want to sound too grandiose here, but learning (particularly when it's something I know zip about) can almost feel like traveling to a new land. It's confusing, challenging, rewarding, and exciting. I really feel this way. I also get a deep satisfaction from feeling my skills grow and having a sense of "I'm improving myself".&lt;/p&gt;
