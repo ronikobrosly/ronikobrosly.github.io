@@ -1,0 +1,283 @@
+<!doctype html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TT9MYHW754"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TT9MYHW754');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="../../../../../static/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
+
+
+    
+
+<meta property="og:title" content="Robotics is hard, but rewarding!">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/robot_car' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
+    <script src="../../../../../static/js/theme-switcher.js"></script>
+    <!-- Mathjax -->
+    <!-- <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script> -->
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+
+</head>
+
+<title>Robotics is hard, but rewarding! - Roni Kobrosly's Personal Site</title>
+
+<body>
+    <div class="container">
+        <h1 class="logo">
+            <a href="/">
+                Roni Kobrosly Ph.D.'s Website
+            </a>
+        </h1>
+        <!-- Top Navigation (local links) -->
+
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/" rel="">Home</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a class="terminal-prompt" href="/blog" rel="">Blog</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/open-source" rel="">Open Source</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/talks" rel="">Talks</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/art" rel="">Art</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/bio" rel="">Bio</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item theme-switcher-item">
+                        <button type="button" class="theme-switcher" aria-label="Cycle color theme" title="Cycle color theme">
+                            <span class="color-wheel" aria-hidden="true"></span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Body -->
+        <div id="body">
+            
+
+
+<div class="terminal-card">
+  <header id="post_title" name="post_title">
+<!-- Set title style -->
+<span name="title" id="title">Robotics is hard, but rewarding!</span>
+</header>
+  <div class="card-body">
+    
+<!-- Append author -->
+<small>
+  <p>
+    written by
+    
+    Roni Kobrosly
+    
+    on
+    <span id="pub_date" name="pub_date">2026-06-28</span>
+
+    
+    | tags:
+    <!-- Append tags after author -->
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/engineering/">
+        engineering
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/robotics/">
+        robotics
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/agentic ai/">
+        agentic ai
+      </a>
+    </span>
+    
+  </p>
+  
+</small>
+
+    <hr>
+    
+    
+    <img src="logo.webp" style="padding: 10px;" >
+    
+
+    <span id="post_body" name="post_body">
+      <p>Sometime in the spring, I got it in my head that it might be fun to try robotics. I've never done it before, and it seemed intimidating, but also potentially fun / disasterous. I won't describe the full end-to-end process here (because that would take a while) but I will give you some of the highlights.</p>
+<p>I decided to try putting my <a href="https://www.raspberrypi.com/products/ai-hat/">Raspberry Pi 5 AI kit</a> into a car. And no, I wasn't copying the Anthropic commercial with that robotic car! I got this idea quite a while ago; I just didn't have the courage until recently to try it.</p>
+<p>Prototyping was fun and involved me sketching out a plan, iterating on it a few times with DeepSeek V4 Pro, then converting it over to a <a href="https://github.com/github/spec-kit">spec-kit</a> input for some spec-driven development, and then slowly co-developing and testing each feature with OpenCode and DeepSeek.</p>
+<p>The car had a forward-mounted camera, so here is me trying out some gesture recognition.</p>
+<p><img src="gesture.webp" alt=""></p>
+<p>At the end of the day, it had the following features (admittedly way too many, but this was a personal project so why I gave myself permission to go wild!). This didn't come in a kit, it came from a bunch of warehouses around the country (and in one case a factory in China):</p>
+<ul>
+<li>Ultrasonic proximity sensors for stopping in front of obstacles</li>
+<li>A Raspberry Pi camera for facial recognition and gesture recognition (a hand up with palm forward meant "STOP!") and following individuals</li>
+<li>A microphone for voice recognition (ended up being a failure)</li>
+<li>An onboard speaker allowing for conversations with the AI</li>
+<li>Wheels and four unique motors that allowed for forward and reverse movement, turning, and spinning in circles.</li>
+</ul>
+<p><img src="robot1.webp" alt=""></p>
+<p><img src="robot2.webp" alt=""></p>
+<p>I wouldn't say my daughter "loved it" because of some of its flaws (wheels spinning were loud and so voice commands stopped working as soon as wheels would spin) but it did get her excited! This is her talking to it in the playroom while a giddy me viewed the user dashboard on my phone.</p>
+<p><img src="cora_robot.webp" alt=""></p>
+<p>I'll write out more of the wins and losses later on, because it was certainly a mixed bag. All and all, this was a fun and humbling experience, and I have a lot of respect for engineers living at the intersection of hardware and software. I'm used to working with software where there aren't that many variables to deal with (do I have the correct dependencies? is the logic correct? is the math right? etc), but the problem space gets massive when you add hardware into the picture: is the part defective? Did I wire it incorrectly? 50 factories/companies make this part, and I could only find 4 tutorials online, do they match what I have? Is the software version I'm using compatible with the hardware version? Yeah...</p>
+
+    </span>
+
+    
+    
+    
+    
+    
+
+  </div>
+
+</div>
+
+
+
+
+        </div>
+
+        <!-- Bottom Navigation (external links) -->
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://drive.proton.me/urls/XDYJT5ZN3G#Uwe0q79gu24M" rel="">
+                            Resume</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/ronikobrosly" rel="">
+                            LinkedIn</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://github.com/ronikobrosly" rel="">
+                            GitHub</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://stackoverflow.com/users/2831487/slyron" rel="">
+                            Stack Overflow</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C21&amp;q=rw+kobrosly&amp;btnG=" rel="">
+                            Publications</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gpg" rel="">
+                            Public GPG Key</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="mailto:roni.kobrosly@proton.me" rel="">
+                            Contact Me</a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</body>
