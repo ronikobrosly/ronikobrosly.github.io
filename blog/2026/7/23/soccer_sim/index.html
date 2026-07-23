@@ -1,0 +1,445 @@
+<!doctype html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TT9MYHW754"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TT9MYHW754');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../../../../static/favicon.png">
+
+    <!-- Open Graph Image -->
+    <meta property="og:image" content="../../../../../static/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    
+<!-- Syntax Highlighter. Use pygments. -->
+<link rel="stylesheet" href="../../../../../static/pygments.css">
+
+
+    
+
+<meta property="og:title" content="How soccer match win probabilities are calculated">
+<meta property='og:url' content='http://ronikobrosly.github.io/blog//blog/soccer_sim' />
+
+
+
+
+    <link rel="stylesheet" href="../../../../../static/css/terminal.css" />
+    <link rel="stylesheet" href="../../../../../static/css/custom.css" />
+    <script src="../../../../../static/js/theme-switcher.js"></script>
+    <!-- Mathjax -->
+    <!-- <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+        </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script> -->
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+
+</head>
+
+<title>How soccer match win probabilities are calculated - Roni Kobrosly's Personal Site</title>
+
+<body>
+    <div class="container">
+        <h1 class="logo">
+            <a href="/">
+                Roni Kobrosly Ph.D.'s Website
+            </a>
+        </h1>
+        <!-- Top Navigation (local links) -->
+
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/" rel="">Home</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a class="terminal-prompt" href="/blog" rel="">Blog</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/open-source" rel="">Open Source</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/talks" rel="">Talks</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/art" rel="">Art</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/bio" rel="">Bio</a>
+                        
+                    </li>
+                    
+                    <li class="menu-item theme-switcher-item">
+                        <button type="button" class="theme-switcher" aria-label="Cycle color theme" title="Cycle color theme">
+                            <span class="color-wheel" aria-hidden="true"></span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Body -->
+        <div id="body">
+            
+
+
+<div class="terminal-card">
+  <header id="post_title" name="post_title">
+<!-- Set title style -->
+<span name="title" id="title">How soccer match win probabilities are calculated</span>
+</header>
+  <div class="card-body">
+    
+<!-- Append author -->
+<small>
+  <p>
+    written by
+    
+    Roni Kobrosly
+    
+    on
+    <span id="pub_date" name="pub_date">2026-07-23</span>
+
+    
+    | tags:
+    <!-- Append tags after author -->
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/engineering/">
+        engineering
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/statistics/">
+        statistics
+      </a>
+    </span>
+    <span class="boxed" id="tags" name="tags">
+      <a class="tags" href="../../../../tag/human data/">
+        human data
+      </a>
+    </span>
+    
+  </p>
+  
+</small>
+
+    <hr>
+    
+    
+    <img src="logo.webp" style="padding: 10px;" >
+    
+
+    <span id="post_body" name="post_body">
+      <p><br>
+<a href="https://github.com/ronikobrosly/robberecht_soccer_simulation">The GitHub repo for this implementation can found here</a></p>
+<p><br></p>
+<p>Yeah I know the World Cup is already over, I was a little late to writing this up.</p>
+<p>I'm not sure what it is about soccer, but I tend to see wayyyy more match win probabilities for it then for other sports. I don't mean on sports betting sites with odds, I mean everywhere: Google, the NYTimes, Nate Silver's blog (yes he's still alive), even dusty, old Yahoo. What is it about soccer specifically? Sincerely don't know 🤷🏻‍♂️</p>
+<p>Many of these predictions are updated minute-by-minute, where the "Win" probability ticks up or down with each goal, and slowly converge towards 0% or 100% as the game ends. I wanted to investigate this. <a href="https://arxiv.org/pdf/1906.05029">Robberecht et al.'s 2021 paper "A Bayesian Approach to In-Game Win Probability in Soccer"</a> is a good starting point. It seems like many of these models are slight variations on the following approach...</p>
+<p><br><br></p>
+<h2 id="1-chop-the-game-into-100-equal-paced-frames">1. Chop the Game Into 100 Equal-Paced Frames</h2><p>The first problem is that time in soccer isn't uniform. Two matches that both read "30:00" on the clock have had different fractions of the actual game elapse, because stoppage time varies from match to match. Robberecht handles this by splitting every match into <strong>T = 100 frames</strong>, each covering a fixed fraction of the game's <em>real</em> duration, meaning wall-clock time including stoppage. Each half is divided into 50 frames of equal real length, so halftime is always exactly frame 50, whether the first half ran 45:00 or 47:30. I didn't fully get that detail for a bit.</p>
+<p>For each frame we compute a set of game-state features for each team. The prediction target for a team at frame <code>t</code> is deliberately not "who wins." It is: <em>how many more goals will this team score between now and the end of regulation?</em></p>
+<p>If you get the above, the rest is easier to wrap your head around.</p>
+<p><br><br></p>
+<h2 id="2-model-future-goals-as-independent-poissons">2. Model Future Goals as Independent Poissons</h2><p>A Poisson distribution is the standard way to model "how many times will a random event happen in a fixed window?" In this case, how many goals a team scores in the time that's left.</p>
+<p>At frame <code>t</code>, we model each team's remaining goals like this:</p>
+<div class="katex-eq">y_{>t, \text{home}} \sim \text{Poisson}\big((T - t) \cdot \theta_{t, \text{home}}\big)</div><div class="katex-eq">y_{>t, \text{away}} \sim \text{Poisson}\big((T - t) \cdot \theta_{t, \text{away}}\big)</div><p><code>θ</code> is a <strong>per-frame scoring intensity</strong>, roughly the team's goal rate right now. <code>(T − t)</code> is the number of frames still to play. Multiply them and you get the expected number of goals the team has left in it: rate × time remaining.</p>
+<p>Robberecht treats the two teams' goal counts as independent. And yeah that's a pretty big simplification.</p>
+<p><br><br></p>
+<p><img src="generate_probs.webp" alt=""></p>
+<p><br><br></p>
+<h2 id="3-game-state-drives-scoring-intensity-via-the-logit">3. Game State Drives Scoring Intensity via the Logit</h2><p>Where does that scoring intensity <code>θ</code> come from? It's computed from the current game state. Since <code>θ</code> has to stay between 0 and 1, so Robberecht passes the game state through a <strong>logistic function</strong>, which squashes any number into that range:</p>
+<div class="katex-eq">
+\begin{aligned} 
+\theta{t,\,\text{home}} &= \operatorname{invlogit}\big(a_t \cdot x_{t,\,\text{home}} + \beta + Ha\big) 
+\end{aligned}
+</div><div class="katex-eq">
+\begin{aligned} 
+\theta_{t,\,\text{away}} &= \operatorname{invlogit}\big(a_t \cdot x_{t,\,\text{away}} + \beta\big) 
+\end{aligned}
+</div><p>Reading the pieces:</p>
+<ul>
+<li><code>x_t</code> is the feature vector describing the game from one team's point of view (section 4).</li>
+<li><code>a_t</code> is the matching vector of weights (how much each feature counts).</li>
+<li><code>β</code> is the intercept, and <code>Ha</code> is a home-advantage term added only for the home team.</li>
+</ul>
+<p>In the trained model <code>β ≈ −4.49</code>. On its own that sets a baseline intensity of <code>invlogit(−4.49) ≈ 0.011</code> goals per frame, about one goal per team over a full match before any features come into play.</p>
+<p>The important part is that <strong>the weights <code>a_t</code> carry a <code>t</code> subscript.</strong> They're allowed to change as the game goes on, which is how the model can learn that a feature matters more in the 85th minute than in the 10th.</p>
+<p><br><br></p>
+<h2 id="4-ten-features-describe-the-game-state-per-team">4. Ten Features Describe the Game State (Per Team)</h2><p>Every feature is computed at every frame:</p>
+<table>
+<thead><tr>
+<th>#</th>
+<th>Feature</th>
+<th>What it captures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>game_time</strong></td>
+<td>Time step <code>t/T</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>score_diff</strong></td>
+<td>Current goal differential</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>rating_diff</strong></td>
+<td>Elo rating difference between the teams</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>team_goals</strong></td>
+<td>Goals this team has scored so far</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>reds</strong></td>
+<td>Red-card differential</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>yellows</strong></td>
+<td>Opponent's accumulated yellow cards</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>opportunities</strong></td>
+<td>Goal-scoring chances per frame</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>attacking_passes</strong></td>
+<td>10-frame rolling mean of completed passes into the final third</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>xt</strong></td>
+<td>12-frame rolling mean of positive expected-threat (xT) gains from passes and carries</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>duel_strength</strong></td>
+<td>10-frame rolling win rate in ground and aerial duels</td>
+</tr>
+</tbody>
+</table>
+<p>Features 7-10 need detailed event-stream data (locations, pass outcomes, duel results). That's tricky to get in real time. So the paper also defines a <strong>live variant</strong> model that keeps only features 1-6. THAT'S THE MODEL THAT WE TEND TO SEE ONLINE.</p>
+<p><br><br></p>
+<h2 id="5-the-coefficients-follow-a-gaussian-random-walk">5. The Coefficients Follow a Gaussian Random Walk</h2><p>This is the core of the Bayesian setup. Rather than fixing one static weight per feature, the model lets each weight wander over the course of the match, but only gently. It does this with a <a href="https://www.pymc.io/projects/examples/en/latest/time_series/MvGaussianRandomWalk_demo.html"><strong>Gaussian random-walk prior</strong></a>:</p>
+<div class="katex-eq">\begin{aligned} a_0 &\sim N(0, 2)\end{aligned}</div><div class="katex-eq">\begin{aligned} a_t &\sim N(a_{t-1}, 2) \quad \text{for } t = 1, \ldots, 100 \end{aligned}</div><p>Put simply, a feature's weight at frame <code>t</code> is expected to relatively close to its value at frame <code>t−1</code>. The weights can drift smoothly across the game, but they pay a penalty for jerking around between neighboring frames.</p>
+<p>All told, the model estimates 100 × 10 = 1,000 weights (or 600 weights for the live model version), plus <code>β</code> and <code>Ha</code>, all at once.</p>
+<p><br><br></p>
+<h2 id="6-training-advi-on-mini-batches">6. Training: ADVI on Mini-Batches</h2><p>I had no idea what <a href="https://www.jmlr.org/papers/volume18/16-107/16-107.pdf">ADVI</a> was before this experiment! 
+The paper trains its models with <strong>Automatic Differentiation Variational Inference (ADVI)</strong> in PyMC3. I gather it's a way to speed up the Bayesian inference on large-ish datasetss.</p>
+<p>In this repo, training feeds the model <strong>358,974 rows</strong> (99 usable frames × 2 teams × 1,813 matches, dropping frame 100 since it has no time remaining) in mini-batches.</p>
+<p><br></p>
+<p><img src="model_training.webp" alt=""></p>
+<p><br><br></p>
+<h2 id="7-prediction-averaging-over-the-posterior-the-skellam-distribution">7. Prediction: Averaging Over the Posterior + the Skellam Distribution</h2><p>Once the model is trained, predicting for a match at frame <code>t</code> works like this.</p>
+<p>1) Turn each posterior sample into two expected goal counts. Training leaves us with 2,000 posterior samples. Each one is a plausible version of the model, a full set of <code>a_t</code>, <code>β</code>, and <code>Ha</code>. For each sample, compute how many more goals each team is expected to score:</p>
+<div class="katex-eq">\begin{aligned} \lambda_\text{home} &= (T - t) \cdot \operatorname{invlogit}\big(a_t \cdot x_\text{home} + \beta + Ha\big) \end{aligned}</div><div class="katex-eq">\begin{aligned} \lambda_\text{away} &= (T - t) \cdot \operatorname{invlogit}\big(a_t \cdot x_\text{away} + \beta\big) \end{aligned}</div><p>2) Write down what "home wins" means. The home team wins regulation if its final total beats the away total:</p>
+<div class="katex-eq">\text{home}_\text{now} + \text{future}_\text{home} > \text{away}_\text{now} + \text{future}_\text{away}</div><p>Let <code>k = −(home_now − away_now)</code>, the negative of the current goal difference. Rearranging, the home team wins exactly when <code>future_home − future_away &gt; k</code>.</p>
+<p>3) Something called the <a href="https://en.wikipedia.org/wiki/Skellam_distribution">Skellam distribution</a>? I hadn't heard of it. This is where the independence assumption from section 2 pays off (that big simplification I mentioned): the difference of two independent Poissons follows a Skellam distribution. So once we have <code>λ_home</code> and <code>λ_away</code>, the win/draw/loss split for that one sample comes straight from a formula, with no need to simulate individual goals one by one:</p>
+<div class="katex-eq">\begin{aligned} P(\text{win}) &= 1 - \mathrm{CDF}_{\mathrm{Skellam}}(k \mid \lambda_\text{home}, \lambda_\text{away}) \end{aligned}</div><div class="katex-eq">\begin{aligned} P(\text{draw}) &= \phantom{1 - {}}\mathrm{PMF}_{\mathrm{Skellam}}(k \mid \lambda_\text{home}, \lambda_\text{away}) \end{aligned}</div><div class="katex-eq">\begin{aligned} P(\text{loss}) &= 1 - P(\text{win}) - P(\text{draw}) \end{aligned}</div><p>4) Average across all 2,000 samples AKA play the game 2,000 times. Doing the Skellam step first and <em>then</em> averaging (rather than averaging the λ's and computing just once) is what carries the model's uncertainty all the way through into the final probabilities.</p>
+<p>Notice that the current score enters through the offset <code>k</code>, not through a feature weight. Keep that in mind for section 10.</p>
+<p><br><br></p>
+<h2 id="8-real-time-use-the-live-pipeline">8. Real-Time Use: The Live Pipeline</h2><p>Section 4.4 of the paper covers deploying this live, when detailed event data isn't available. You need:</p>
+<ul>
+<li><strong>Pre-match Elo ratings</strong> for both teams (see <code>eloratings.net</code> for nations). This is the <code>rating_diff</code> feature and the single strongest <em>pre-game</em> predictor.</li>
+<li><strong>A live key-event feed</strong> (goals, cards) to increment the tallies frame by frame.</li>
+<li><strong>The real half durations.</strong> For an unfinished game you don't yet know how much stoppage time is coming, so the paper trains a <em>separate random forest</em> just to predict added time from the current game state (substitutions, cards, injuries, etc.).</li>
+</ul>
+<p>The live model then updates probabilities every frame using only the six features you can derive from goals, cards, and ratings.</p>
+<p><br><br></p>
+<h2 id="9-what-the-coefficients-actually-say">9. What the Coefficients Actually Say</h2><p>A raw coefficient is not a feature importance. The weights <code>a_t</code> are on a <em>per-unit</em> scale, and the ten features have wildly different units. The fix is to standardize them. Multiply each weight by the feature's spread in the data (its standard deviation). That gives the effect on the log scoring-intensity of a realistic, 1-standard-deviation move in the feature.</p>
+<table>
+<thead><tr>
+<th>Feature</th>
+<th style="text-align:right">raw weight</th>
+<th style="text-align:right">feature SD</th>
+<th style="text-align:right"><strong>per-SD effect</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Elo rating differential</strong></td>
+<td style="text-align:right">+0.0016</td>
+<td style="text-align:right">177</td>
+<td style="text-align:right"><strong>+0.29</strong></td>
+</tr>
+<tr>
+<td>Red-card differential</td>
+<td style="text-align:right">−0.399</td>
+<td style="text-align:right">0.27</td>
+<td style="text-align:right">−0.11</td>
+</tr>
+<tr>
+<td>Game time</td>
+<td style="text-align:right">−0.320</td>
+<td style="text-align:right">0.29</td>
+<td style="text-align:right">−0.09</td>
+</tr>
+<tr>
+<td>Scoring opportunities</td>
+<td style="text-align:right">+1.219</td>
+<td style="text-align:right">0.06</td>
+<td style="text-align:right">+0.07</td>
+</tr>
+<tr>
+<td>Score differential</td>
+<td style="text-align:right">−0.044</td>
+<td style="text-align:right">1.18</td>
+<td style="text-align:right">−0.05</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Very interestingly</strong>: home advantage has a decent effect on things. <code>Ha ≈ +0.23</code> (full model) to +0.26 (live). Because the baseline intensity is small, that multiplies a team's per-frame scoring intensity by ≈ <code>e^0.23 ≈ 1.25</code>, a <strong>~25% boost</strong> for playing at home in a non-neutral venue.</p>
+<p>When all is said and done, you get this kind of output (which is based on the real England vs Argentina game):</p>
+<p><img src="England_Argentina.webp" alt=""></p>
+<p><br></p>
+<p><!-- KaTeX: scoped to this post only. Renders each .katex-eq block above. --></p>
+<p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous"></p>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".katex-eq").forEach(function (el) {
+      katex.render(el.textContent, el, { displayMode: true, throwOnError: false });
+    });
+  });
+</script>
+    </span>
+
+    
+    
+    
+    
+    
+
+  </div>
+
+</div>
+
+
+
+
+        </div>
+
+        <!-- Bottom Navigation (external links) -->
+        <div class="terminal-nav">
+            <nav class="terminal-menu" id="local-links">
+                <ul>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://drive.proton.me/urls/TC68JZ06ZC#YBhx21Xo7Z8a" rel="">
+                            Resume</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/ronikobrosly" rel="">
+                            LinkedIn</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://github.com/ronikobrosly" rel="">
+                            GitHub</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://stackoverflow.com/users/2831487/slyron" rel="">
+                            Stack Overflow</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C21&amp;q=rw+kobrosly&amp;btnG=" rel="">
+                            Publications</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gpg" rel="">
+                            Public GPG Key</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="mailto:roni.kobrosly@proton.me" rel="">
+                            Contact Me</a>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</body>
